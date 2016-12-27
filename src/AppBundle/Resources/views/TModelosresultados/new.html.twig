@@ -1,0 +1,25 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+<h1>TModelosresultados creation</h1>
+
+    <div id="new_modelo_resultados">
+        {{ form_start(form) }}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.fbActivo) }}
+        {{ form_row(form.fnIdUnidade) }}
+
+        {{ form_end(form) }}
+    </div>
+    <a href="/RegrasFormatacao/new" class="button">Formatação</a>
+    <!--
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('tmodelosresultados') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>-->
+{% endblock %}

@@ -1,0 +1,197 @@
+{% extends '::base.html.twig' %}
+
+<script type="text/javascript" src="{{ asset('/bundles/app/js/toastr.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('/bundles/app/css/toastr.min.css') }}" />
+
+{% block body %}
+        <h1>TModelosresultados list</h1>
+        <script>
+            var app = angular.module('myApp', ['ui.grid','ui.grid.selection','ui.grid.autoResize']).config(function($interpolateProvider){
+                $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+            }).controller('customersCtrl', function($scope, $http) {
+
+                angular.element("#new_modelo_resultados form").submit( function( e ){
+                    e.preventDefault();
+                    $scope.postForm( $(this), function( response ){
+                    }, "modelo");
+                    return false;
+                });
+                $scope.deletesel = function(){
+                    var selec_rows = $scope.gridApi.selection.getSelectedRows();
+                    var index_string ="";
+                    $.each(selec_rows,function(key,elem){
+                        index_string = index_string + elem.fn_id + "L";
+                    });
+                    $.ajax({
+                        type        : 'DELETE',
+                        url         : "DeleteSelec/" + index_string,
+                        success     : function(data) {
+                            $scope.myData.length = 0;
+                            $scope.myData  = (JSON.parse(JSON.parse(data)));
+                            if($scope.myData.length == 0){
+
+                            }else{$scope.cur_id = $scope.myData[$scope.myData.length -1].fn_id;}
+
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        }
+                    });
+                },
+                $scope.postForm = function( $form, callback , orig ){
+                    var values = {};
+                    $.each( $form.serializeArray(), function(i, field) {
+                        values[field.name] = field.value;
+                    });
+                    $.ajax({
+                        type        : $form.attr( 'method' ),
+                        url         : $form.attr( 'action' ),
+                        data        : values,
+                        success     : function(data) {
+                            if(orig == "modelo"){
+                                $scope.myData.push(JSON.parse(JSON.parse(data)));
+                                $scope.cur_id = $scope.myData[$scope.myData.length -1].fn_id;
+                                if (!$scope.$$phase) {
+                                    $scope.$apply();
+                                }
+                            }
+                        }
+                    });
+                },
+                $scope.$on( "updateGrid", function(e,d){
+                });
+
+                $scope.gridOptions1 = {
+                    enableRowSelection: true,
+                    enableSelectAll: true,
+                    enableFullRowSelection: true,
+                    selectionRowHeaderWidth: 35,
+                    rowHeight: 35,
+                    data : 'myData'
+                };
+
+                $scope.gridOptions1.columnDefs = [
+                    { field: 'fn_id',displayName:'ID'},
+                    { field: 'fb_activo',displayName:'Ativo'},
+                    { field: 'ft_descricao',displayName:'Nome'},
+                    { field: 'fn_tipoarredondamento.ft_descricao',displayName:'Arredondamento' }
+                ];
+
+                $scope.gridOptions1.onRegisterApi = function(gridApi){
+                    //set gridApi on scope
+                    $scope.gridApi = gridApi;
+                    $scope.gridApi.selection.on.rowSelectionChanged($scope,function(row){
+                        $scope.cur_id = row.entity.fn_id;
+                    });
+
+                };
+
+                $http.get('GetAllModelosResultado').
+                    then(function(response) {
+                        var data = JSON.parse(JSON.parse(response.data));
+                            $scope.myData = data;
+                    }, function(response) {
+                });
+            }).controller('RegrasFormatacaoCRTL', function($scope, $http) {
+                    $scope.openformatacao = function(){
+                            if($scope.curid ==""){
+                                toastr.info("Tem de seleccionar um elemento da grelha ou criar um novo");
+                            }else{
+                                $http.get('/tregrasformatacao/GetAllRegrasFormatacao/'+ $scope.curid).
+                                        then(function(response) {
+                                            var data =response;
+                                            if(data.data.indexOf("null") != -1){
+                                                $('#new_role').modal('show');
+
+                                            }else{
+                                                $('#new_role').modal('show');
+                                               $scope.myData_regras = JSON.parse(JSON.parse(data.data));
+                                            }
+                                        }, function(response) {
+
+                                        });
+                            }
+
+                        },
+
+                    angular.element("#regrasFormatacaoForm form").submit( function( e ){
+                        e.preventDefault();
+                        $scope.postForm( $(this), function( response ){
+                        }, "modelo");
+                        return false;
+                    });
+                $scope.postForm = function( $form, callback , orig ){
+                    var values = {};
+                    $.each( $form.serializeArray(), function(i, field) {
+                        values[field.name] = field.value;
+                    });
+                    values["appbundle_tregrasformatacao[fnModeloresultado]"] =  parseInt($scope.curid);
+                    $.ajax({
+                        type        : $form.attr( 'method' ),
+                        url         : $form.attr( 'action' ),
+                        data        : values,
+                        success     : function(data) {
+                            $scope.myData_regras.push(JSON.parse(JSON.parse(data)));
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
+                        }
+                    });
+                },
+                        $scope.$watch(function(){
+
+                            return angular.element('#cur_id').val();
+
+                        }, function(newVal, oldVal){
+                            $scope.curid = newVal;
+                        }, true);
+
+
+
+
+                        $scope.$on( "updateGrid", function(e,d){
+                        });
+                        $scope.gridOptionsRegrasformatacao = { data : 'myData_regras' };
+                        $scope.gridOptionsRegrasformatacao.columnDefs = [
+                            {field: 'fn_id', displayName: 'Id'},
+                            { field: 'fbFormatoexponencial'},
+                            { field: 'ftDescricao'},
+                            { field: 'fnOrdem'},
+                            { field: 'fnLimiteinferior'},
+                            { field: 'fnLimitesuperior'},
+                            { field: 'fnCasasdecimais'},
+                            { field: 'ftExpressaoutilizador'},
+
+                        ];
+                        $scope.gridOptionsRegrasformatacao.onRegisterApi = function(gridApi){
+                            //set gridApi on scope
+                            $scope.gridApi = gridApi;
+                            $interval( function() {
+                                $scope.gridApi.core.handleWindowResize();
+                            }, 10, 500);                        };
+                    });
+
+        </script>
+
+        <div ng-app="myApp" >
+
+            <div ng-controller="customersCtrl">
+                <a href="/ModelosResultados/new" class="button">Criar Novo</a>
+
+                <div ui-grid="gridOptions1" ui-grid-selection  class="grid"></div>
+                <input type="hidden" id="cur_id" value="{[{cur_id}]}">
+                <a href="#" ng-click="deletesel()" class="button">Apagar Selecionados</a>
+            </div>
+
+            <div  ng-controller="RegrasFormatacaoCRTL">
+            </div>
+        </div>
+
+        <!--
+<ul>
+<li>
+Create a new entry
+</a>
+</li>
+</ul>-->
+{% endblock %}

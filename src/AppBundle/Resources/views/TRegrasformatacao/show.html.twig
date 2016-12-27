@@ -1,0 +1,60 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TRegrasformatacao</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Fnid</th>
+                <td>{{ entity.fnId }}</td>
+            </tr>
+            <tr>
+                <th>Fnordem</th>
+                <td>{{ entity.fnOrdem }}</td>
+            </tr>
+            <tr>
+                <th>Ftdescricao</th>
+                <td>{{ entity.ftDescricao }}</td>
+            </tr>
+            <tr>
+                <th>Fnlimiteinferior</th>
+                <td>{{ entity.fnLimiteinferior }}</td>
+            </tr>
+            <tr>
+                <th>Fnlimitesuperior</th>
+                <td>{{ entity.fnLimitesuperior }}</td>
+            </tr>
+            <tr>
+                <th>Fncasasdecimais</th>
+                <td>{{ entity.fnCasasdecimais }}</td>
+            </tr>
+            <tr>
+                <th>Fbformatoexponencial</th>
+                <td>{{ entity.fbFormatoexponencial }}</td>
+            </tr>
+            <tr>
+                <th>Fbformatoutilizador</th>
+                <td>{{ entity.fbFormatoutilizador }}</td>
+            </tr>
+            <tr>
+                <th>Ftexpressaoutilizador</th>
+                <td>{{ entity.ftExpressaoutilizador }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tregrasformatacao') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('tregrasformatacao_edit', { 'id': entity.fnId }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

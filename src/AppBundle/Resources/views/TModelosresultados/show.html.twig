@@ -1,0 +1,68 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TModelosresultados</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Fnid</th>
+                <td>{{ entity.fnId }}</td>
+            </tr>
+            <tr>
+                <th>Fbactivo</th>
+                <td>{{ entity.fbActivo }}</td>
+            </tr>
+            <tr>
+                <th>Fnidunidade</th>
+                <td>{{ entity.fnIdUnidade }}</td>
+            </tr>
+            <tr>
+                <th>Fbincluirnorelatorio</th>
+                <td>{{ entity.fbIncluirnorelatorio }}</td>
+            </tr>
+            <tr>
+                <th>Fbgamavalores</th>
+                <td>{{ entity.fbGamavalores }}</td>
+            </tr>
+            <tr>
+                <th>Fnmaximo</th>
+                <td>{{ entity.fnMaximo }}</td>
+            </tr>
+            <tr>
+                <th>Fnminimo</th>
+                <td>{{ entity.fnMinimo }}</td>
+            </tr>
+            <tr>
+                <th>Ftmensagemutilizador</th>
+                <td>{{ entity.ftMensagemutilizador }}</td>
+            </tr>
+            <tr>
+                <th>Ftdescricao</th>
+                <td>{{ entity.ftDescricao }}</td>
+            </tr>
+            <tr>
+                <th>Fnlimitequantificacao</th>
+                <td>{{ entity.fnLimitequantificacao }}</td>
+            </tr>
+            <tr>
+                <th>Ftobservacao</th>
+                <td>{{ entity.ftObservacao }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tmodelosresultados') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('tmodelosresultados_edit', { 'id': entity.fnId }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

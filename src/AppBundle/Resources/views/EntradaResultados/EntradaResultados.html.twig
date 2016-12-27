@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Entrada de Resultados{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/app.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/menu.css') }}" />
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+    {#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/ui-grid.min.css') }}" />
+    {#<link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">#}
+
+    <link rel="stylesheet" href="{{ asset('bundles/sonataadmin/vendor/select2/select2.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/toastr.min.css') }}" />
+
+
+    {% block javascripts %}
+
+        <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/vendor/jquery.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
+
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+        {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+        {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+        {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+        {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+        {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap.min.js') }}"></script>
+        {#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>#}
+        <script type="text/javascript" src="{{ asset('bundles/app/js/net/ui-grid.min.js') }}"></script>
+        {#<script src="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>#}
+
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/editablegrid.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/editablegrid.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/editablegrid_renderers.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/editablegrid_editors.js')}}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/editablegrid_validators.js')}}"></script>
+        <script  type="text/javascript" src="{{ asset('bundles/app/js/editablegrid_utils.js')}}"></script>
+        <script  type="text/javascript" src="{{ asset('bundles/app/js/editablegrid_charts.js')}}"></script>
+
+        <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/sonataadmin/vendor/select2/select2.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/app/js/toastr.min.js') }}"></script>
+
+    {% endblock %}
+</head>
+<body>
+
+<style>
+
+    .botao_enviar{
+        margin-top: -100px!important;
+    }
+</style>
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/fontes_awesome.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/perfil.css') }}" />
+
+{% endblock %}
+
+<div class="container-fluid">
+
+    <div class="row" style="height: 100%">
+        <div class="large-1 medium-1 columns no-padding" style="height:100vh;border: 1px solid #DFDFDF;z-index: 5;padding: 0">
+        {% include 'default/menu.html.twig' %}
+        </div>
+        <div class=" large-15 medium-15 columns no-padding">
+            <div class="row">
+                <div class="large-16 medium-16 columns ">
+
+                    {% include 'default/topheader_ent_resultados.html.twig' %}
+
+
+
+                </div>
+            </div>
+
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row">
+
+                <div class="large-16 medium-16 columns no-padding" >
+
+                    {% block actions %}
+
+
+                        <div class="form-group large-12 medium-12 push-1">
+                            <label for="inputdefault">ID Amostra</label>
+                            <input class="form-control" id="Amostra_id" type="text">
+                        </div>
+                        <div class="form-group large-12 medium-12 push-1">
+                            <label for="parametro_ent_resultados">Parâmetro</label>
+                            <select class="parametro_ent_resultados" data-placeholder="Selecione um Parâmetro" >
+                                <option></option>
+                                {% for parameter in data %}
+                                    <option value="{{ parameter.fnId }}">{{ parameter.ftDescricao }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="row linha_branco"><div class="col-md-12">0</div></div>
+                        <div class="row linha_branco"><div class="col-md-12">0</div></div>
+                        <div class="row" style="border-bottom: 1px solid #dfdfdf"></div>
+                        <div class="row linha_branco"><div class="col-md-12">0</div></div>
+
+                        <div class="bottom-buttons buttons-center">
+                            <a href="#" onclick="getdata()" class="hollow-button"><i style="padding-right: 8px" class="fa fa-search"></i>Pesquisar</a>
+                            <a href="#" onclick="savedata()" class="hollow-button"><i style="padding-right: 8px" class="fa fa-save"></i>Salvar</a>
+                        </div>
+
+                        <div class="row linha_branco"><div class="col-md-12">0</div></div>
+                        <div class="row linha_branco"><div class="col-md-12">0</div></div>
+                    {% endblock %}
+                    {% block tab_menu %}
+                    {% endblock %}
+                    {% block show %}
+                    {% endblock %}
+                    {% block form %}
+                    {% endblock %}
+
+                    {% block list_table %}
+                        <div id="tablecontent" ></div>
+
+                    {% endblock %}
+                    {% block list_filters %}
+                    {% endblock %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+
+   $( document ).ready(function() {
+        editableGrid = new EditableGrid("Entrada Resultados",{
+            modelChanged: function(rowIndex, columnIndex, oldValue, newValue, row) {
+                $.ajax({
+                    type: "POST",
+                    url: '{{path('EntradaResultadosgetByRegrasFormatacao')}}',
+                    data: {data1 : row.cells[1].textContent , data2 :row.cells[6].textContent },
+                    success: function(data) {
+                        var obj = $.parseJSON(data);
+                        var val_down = 0;
+                        var val_up = 0;
+                        var validate = false;
+                        if(obj.condi.length !=0) {
+                            $.each(obj.condi, function( index, value ) {
+                                val_down = value.fn_limiteinferior;
+                                val_up = value.fn_limitesuperior;
+                                if(parseFloat(newValue.replace(',','.').replace(' ','')) > parseFloat(val_down.replace(',','.').replace(' ','')) && parseFloat(newValue.replace(',','.').replace(' ','')) < parseFloat(val_up.replace(',','.').replace(' ',''))){
+                                    editableGrid.setValueAt(rowIndex, 4, value.ft_expressaoutilizador, true);
+                                    validate = true;
+                                }
+                            });
+
+                        }
+                        if(validate == false){
+                            editableGrid.setValueAt(rowIndex, 4, newValue, true);
+                        }
+                    }
+                });
+            editableGrid.editCell(rowIndex + 1, 3);
+            }
+        });
+        editableGrid.tableLoaded = function() { this.renderGrid("tablecontent", "testgrid"); };
+    });
+
+    var condi;
+    function savedata() {
+        if (editableGrid.data.length != 0) {
+            $.ajax({
+                type: "POST",
+                url: '{{ path('EntradaResultadossetByRegrasFormatacao') }}',
+                data: JSON.stringify(editableGrid.data),
+                success: function (data) {
+                    if (data > 0) {
+                        toastr.info("Resultados Guardados com sucesso");
+                    } else {
+                        toastr.info("Resultados não guardados");
+                    }
+                }
+            });
+
+        }
+    }
+
+    function getdata(){
+        if( $('.parametro_ent_resultados').select2('data') != null){
+            $.ajax({
+                type: "POST",
+                url: '{{path('EntradaResultadosGetByParameter')}}',
+                data: $('.parametro_ent_resultados').select2('data').id,
+                success: function(data) {
+                    if(data != "null"){
+                        var metadata = [];
+                        metadata.push({name: "ft_id_estado", label: "E", datatype: "string", editable: false});
+                        metadata.push({
+                            name: "fn_id_amostra",
+                            label: "Amostra",
+                            datatype: "string",
+                            editable: false
+                        });
+                        metadata.push({
+                            name: "ft_descricao",
+                            label: "Parâmetro",
+                            datatype: "string",
+                            editable: false
+                        });
+                        metadata.push({
+                            name: "ft_original",
+                            label: "Resultado Original",
+                            datatype: "string",
+                            editable: true
+                        });
+                        metadata.push({
+                            name: "ft_formatado",
+                            label: "Valor Formatado",
+                            datatype: "string",
+                            editable: false
+                        });
+                        metadata.push({name: "medida", label: "Unidades", datatype: "string", editable: false});
+                        metadata.push({
+                            name: "fn_id_parametro",
+                            label: "ID Parâmetro",
+                            datatype: "string",
+                            hidden: true
+                        });
+                        var obj = $.parseJSON(data);
+                        if(obj.data && obj.data.length !=0){
+                            var data2 = [];
+                            var tt =1;
+                            $.each( obj.data, function( key, value ) {
+                                var values = JSON.stringify(value).replace('[','');
+                                values = values.replace(']','');
+                                data2.push({id: tt, values: JSON.parse(values)});
+                                tt++;
+                            });
+                        }else{
+                            var data2 = [];
+                        }
+                        editableGrid.load({"metadata": metadata, "data": data2});
+                        editableGrid.renderGrid("tablecontent", "testgrid");
+                    }else{
+                        $("table.testgrid tbody").html('');
+                        toastr.info("Não foram encontrados resultados para o seu pedido.")
+                    }
+                }
+            });
+        }else{
+            if( $('#Amostra_id').val() != null){
+                $.ajax({
+                    type: "POST",
+                    url: '{{path('EntradaResultadosGetByAmostra')}}',
+                    data: $('#Amostra_id').val(),
+                    success: function(data) {
+                        if (data != "null") {
+                            var metadata = [];
+                            metadata.push({name: "ft_id_estado", label: "E", datatype: "string", editable: false});
+                            metadata.push({
+                                name: "fn_id_amostra",
+                                label: "Amostra",
+                                datatype: "string",
+                                editable: false
+                            });
+                            metadata.push({
+                                name: "ft_descricao",
+                                label: "Parâmetro",
+                                datatype: "string",
+                                editable: false
+                            });
+                            metadata.push({
+                                name: "ft_original",
+                                label: "Resultado Original",
+                                datatype: "string",
+                                editable: true
+                            });
+                            metadata.push({
+                                name: "ft_formatado",
+                                label: "Valor Formatado",
+                                datatype: "string",
+                                editable: false
+                            });
+                            metadata.push({name: "medida", label: "Unidades", datatype: "string", editable: false});
+                            metadata.push({
+                                name: "fn_id_parametro",
+                                label: "ID Parâmetro",
+                                datatype: "string",
+                                hidden: true
+                            });
+
+                            var obj = $.parseJSON(data);
+
+                            if (obj.data.length != 0) {
+                                var data2 = [];
+                                var tt = 1;
+                                $.each(obj.data, function (key, value) {
+
+                                    var values = JSON.stringify(value).replace('[', '');
+                                    values = values.replace(']', '');
+
+                                    data2.push({id: tt, values: JSON.parse(values)});
+                                    tt++;
+                                });
+                            } else {
+                                var data2 = [];
+
+                            }
+                            editableGrid.load({"metadata": metadata, "data": data2});
+                            editableGrid.renderGrid("tablecontent", "testgrid");
+
+                        } else {
+                            toastr.info("Não foram encontrados resultados para o seu pedido.")
+                        }
+                    }
+                });
+            }
+
+        }
+
+
+    }
+
+    $(document).ready(function() {
+        $(".parametro_ent_resultados").select2({
+            allowClear: true,
+            placeholder: "Selecione uma opção"
+        });
+
+
+
+    });
+
+</script>
+
+</body>
+</html>

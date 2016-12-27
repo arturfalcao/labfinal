@@ -1,0 +1,225 @@
+services:
+    app.admin.t_modelosresultados:
+        class: AppBundle\Entity\TModelosresultadosAdmin
+        arguments: [~, AppBundle\Entity\TModelosresultados, AppBundle:TModelosresultadosAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modelo de Resultados}
+        calls:
+            - [ setTemplate, [edit, AppBundle:RegrasFormatacao:edit.html.twig]]
+    app.admin.t_areasensaio:
+        class: AppBundle\Entity\TAreasensaioAdmin
+        arguments: [~, AppBundle\Entity\TAreasensaio, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Areas de ensaio}
+
+    app.admin.t_estados:
+        class: AppBundle\Entity\TEstadosAdmin
+        arguments: [~, AppBundle\Entity\TEstados, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Estados}
+
+    app.admin.t_familiasparametros:
+        class: AppBundle\Entity\TFamiliasparametrosAdmin
+        arguments: [~, AppBundle\Entity\TFamiliasparametros, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Familias de parametros}
+
+    app.admin.t_frascos:
+        class: AppBundle\Entity\TFrascosAdmin
+        arguments: [~, AppBundle\Entity\TFrascos, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Frascos}
+
+    app.admin.t_laboratorios:
+        class: AppBundle\Entity\TLaboratoriosAdmin
+        arguments: [~, AppBundle\Entity\TLaboratorios, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Laboratorios}
+
+    app.admin.t_metodos:
+        class: AppBundle\Entity\TMetodosAdmin
+        arguments: [~, AppBundle\Entity\TMetodos, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Metodos}
+
+    app.admin.t_modelosparametro:
+        class: AppBundle\Entity\TModelosparametroAdmin
+        arguments: [~, AppBundle\Entity\TModelosparametro, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modelos Parametro}
+
+    app.admin.t_modelosparametrosgrupo:
+        class: AppBundle\Entity\TModelosparametrosgrupoAdmin
+        arguments: [~, AppBundle\Entity\TModelosparametrosgrupo, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modelos parametros grupo}
+
+    app.admin.t_parametros:
+        class: AppBundle\Entity\TParametrosAdmin
+        arguments: [~, AppBundle\Entity\TParametros, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Parametros}
+
+    app.admin.t_regrasformatacao:
+        class: AppBundle\Entity\TRegrasformatacaoAdmin
+        arguments: [~, AppBundle\Entity\TRegrasformatacao, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Regras formatacao}
+
+    app.admin.t_tecnicas:
+        class: AppBundle\Entity\TTecnicasAdmin
+        arguments: [~, AppBundle\Entity\TTecnicas, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tecnicas}
+
+    app.admin.t_tiposarredondamento:
+        class: AppBundle\Entity\TTiposarredondamentoAdmin
+        arguments: [~, AppBundle\Entity\TTiposarredondamento, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tipos de arredondamento}
+
+    app.admin.t_amostras:
+        class: AppBundle\Entity\TAmostrasAdmin
+        arguments: [~, AppBundle\Entity\TAmostras, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Amostra}
+        calls:
+            - [ setTemplate, [edit, AppBundle:Amostras:edit.html.twig]]
+            - [ setTemplate, [list, AppBundle:Amostras:list.html.twig]]
+
+    app.admin.t_unidadesmedida:
+        class: AppBundle\Entity\TUnidadesmedidaAdmin
+        arguments: [~, AppBundle\Entity\TUnidadesmedida, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Unidades de Medida}
+
+    app.admin.t_clientes:
+        class: AppBundle\Entity\TClientesAdmin
+        arguments: [~, AppBundle\Entity\TClientes, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Clientes}
+
+    app.admin.t_gruposparametros:
+        class: AppBundle\Entity\TGruposparametrosAdmin
+        arguments: [~, AppBundle\Entity\TGruposparametros, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Grupos Parametros}
+
+    app.admin.t_legislacao:
+        class: AppBundle\Entity\TLegislacaoAdmin
+        arguments: [~, AppBundle\Entity\TLegislacao, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Legislacao}
+
+    app.admin.t_modelosamostra:
+        class: AppBundle\Entity\TModelosamostraAdmin
+        arguments: [~, AppBundle\Entity\TModelosamostra, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modelos Amostra}
+
+    app.admin.t_produtos:
+        class: AppBundle\Entity\TProdutosAdmin
+        arguments: [~, AppBundle\Entity\TProdutos, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Produtos}
+
+    app.admin.t_tipoaprovacao:
+        class: AppBundle\Entity\TTipoaprovacaoAdmin
+        arguments: [~, AppBundle\Entity\TTipoaprovacao, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tipo de aprovacao}
+
+    app.admin.t_tiposamostra:
+        class: AppBundle\Entity\TTiposamostraAdmin
+        arguments: [~, AppBundle\Entity\TTiposamostra, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tipos de amostra}
+
+    app.admin.t_tiposcontrolo:
+        class: AppBundle\Entity\TTiposcontroloAdmin
+        arguments: [~, AppBundle\Entity\TTiposcontrolo, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tipos de controlo}
+
+    app.admin.t_especificacoes:
+        class: AppBundle\Entity\TEspecificacoesAdmin
+        arguments: [~, AppBundle\Entity\TEspecificacoes, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Especificacoes}
+
+    app.admin.t_locaiscolheita:
+        class: AppBundle\Entity\TLocaiscolheitaAdmin
+        arguments: [~, AppBundle\Entity\TLocaiscolheita, AppBundle:TLocaiscolheitaAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Locais de colheita}
+
+    app.admin.t_requisicoes:
+        class: AppBundle\Entity\TRequisicoesAdmin
+        arguments: [~, AppBundle\Entity\TRequisicoes, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Requisicoes}
+
+    app.admin.t_requisicoescliente:
+        class: AppBundle\Entity\TRequisicoesclienteAdmin
+        arguments: [~, AppBundle\Entity\TRequisicoescliente, AppBundle:TRequisicoesclienteAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Requisicoes de cliente}
+
+    app.admin.t_responsaveiscolheita:
+        class: AppBundle\Entity\TResponsaveiscolheitaAdmin
+        arguments: [~, AppBundle\Entity\TResponsaveiscolheita, AppBundle:TResponsaveiscolheitaAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Responsaveis da colheita}
+
+    app.admin.t_resultados:
+        class: AppBundle\Entity\TResultadosAdmin
+        arguments: [~, AppBundle\Entity\TResultados, AppBundle:TResultadosAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Resultados}
+    app.admin.t_produtos:
+            class: AppBundle\Entity\TProdutosAdmin
+            arguments: [~, AppBundle\Entity\TProdutos, AppBundle:TProdutosAdmin]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: admin, label: Produtos}
+
+    app.admin.modelos_listas:
+        class: AppBundle\Entity\ModelosListasAdmin
+        arguments: [~, AppBundle\Entity\ModelosListas, AppBundle:ModelosListasAdmin]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Modelos Listas}
+        calls:
+            - [ setTemplate, [edit, AppBundle:ModelosListas:edit.html.twig]]
+
+    app.admin.t_tipoparametro:
+        class: AppBundle\Entity\TTipoparametroAdmin
+        arguments: [~, AppBundle\Entity\TTipoparametro, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Tipo de Parametro}
+
+    app.admin.t_produtosespecificacoes:
+        class: AppBundle\Entity\TProdutosespecificacoesAdmin
+        arguments: [~, AppBundle\Entity\TProdutosespecificacoes, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Produtos especificacoes}
+
+    app.admin.t_familiasprodutos:
+        class: AppBundle\Entity\TFamiliasprodutosAdmin
+        arguments: [~, AppBundle\Entity\TFamiliasprodutos, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Familias produtos}
+    app.admin.t_amostrasalimentos:
+        class: AppBundle\Entity\TAmostrasalimentosAdmin
+        arguments: [~, AppBundle\Entity\TAmostrasalimentos, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Amostras Alimentos}
+    app.admin.t_parametrosporespecificacao:
+        class: AppBundle\Entity\TParametrosporespecificacaoAdmin
+        arguments: [~, AppBundle\Entity\TParametrosporespecificacao, SonataAdminBundle:CRUD]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: admin, label: Parametros amostra}
+
+    app.admin.listastrabalhos:
+            class: AppBundle\Entity\ListaTrabalhosAdmin
+            arguments: [~, AppBundle\Entity\ListaTrabalhos, SonataAdminBundle:CRUD]
+            tags:
+                - {name: sonata.admin, manager_type: orm, group: admin, label: Listas de Trabalho}

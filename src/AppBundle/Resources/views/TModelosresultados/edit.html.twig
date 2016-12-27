@@ -1,0 +1,18 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TModelosresultados edit</h1>
+
+    {{ form(edit_form) }}
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tmodelosresultados') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
+
+<div id="search-2" class="widget widget_search"><form method="GET" id="searchform" class="form-horizontal" action="http://pinheiro.iwish.solutions/" role="form"> <label for="s" class="sr-only"></label>	<input type="search" id="s" name="s" class="form-control" value="weq" placeholder="Pesquisa"> <input type="submit" id="searchsubmit" class="hidden" value="Pesquisa"> </form></div>

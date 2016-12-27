@@ -1,0 +1,222 @@
+
+
+{% include 'AppBundle::resources.html.twig' %}
+
+
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+{#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+{% endstylesheets %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+    {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/lang-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery.timepicker.js') }}"></script>
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="/bundles/app/css/calendario.css" />
+<link rel="stylesheet" type="text/css" href="/bundles/app/css/jquery.timepicker.css" />
+
+{% block scripts -%}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>#}
+
+    <script type="text/javascript">
+        angular.module('CalendarModule', [])
+                .controller('CalendarCtrl', function($scope, $locale, $http) {
+                    $scope.show = true;
+                    $scope.changeshow = function(){
+                        $scope.show = $scope.show == true ? false : true;
+
+                    }
+                }).config(function($interpolateProvider){
+                    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+                });
+
+
+    </script>
+{% endblock %}
+
+<div class="container-fluid new_cal_element new_planeamento">
+    <div class="row">
+        <div class="large-1 medium-1 columns no-padding" style="position:fixed;height: 100vh;border: 1px solid #DFDFDF;z-index: 5;">
+            {% include 'default/menu.html.twig' %}
+        </div>
+        <div class=" large-15 medium-15 columns">
+            <div class="row">
+                <div class="large-16 medium-16 columns">
+                    {% include 'default/topheader_planeamento_new.html.twig' %}
+
+
+                </div>
+            </div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row">
+                <div class="large-16 medium-16 columns no-padding">
+
+                    {% block body -%}
+                        {{ form_start(form) }}
+                        <div class="row linha_branco">0</div>
+                        <div class="row linha_branco">0</div>
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(form.fnCliente, 'Cliente') }}
+                            {{ form_widget(form.fnCliente) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(form.ftRefexterna, 'Local de Recolha') }}
+                            {{ form_widget(form.ftRefexterna) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(form.ftGrupoparametros, 'Grupo de Parâmetros') }}
+                            {{ form_widget(form.ftGrupoparametros) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(form.fnProduto, 'Produto') }}
+                            {{ form_widget(form.fnProduto) }}
+                        </div>
+
+                        <div class="large-3 medium-3 push-1 form-group">
+                            {{ form_label(form.startdatetime, 'Data de início') }}
+                            {{ form_widget(form.startdatetime) }}
+                        </div>
+
+                        <div class="large-3 medium-3 push-1 form-group">
+                            {{ form_label(form.enddatetime, 'Data de fim') }}
+                            {{ form_widget(form.enddatetime) }}
+                        </div>
+
+                        <div class="row linha_branco">0</div>
+                        <hr>
+
+
+                        <div class="bottom-buttons buttons-center">
+                            <button type="submit" id="g_sair" class="btn-success">
+                                <i class="fa fa-save"></i>
+                                <span>Guardar</span>
+                            </button>
+
+                            <button id="cancelar" class="btn-danger">
+                                <i class="fa fa-times-circle"></i>
+                                <span>Cancelar</span>
+                            </button>
+                        </div>
+
+
+
+
+                        {{ form_end(form) }}
+
+
+                    {% endblock %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function sendForm(form, callback) {
+        // Get all form values
+        var values = {};
+        $.each( form[0].elements, function(i, field) {
+            if (field.type != 'checkbox' || (field.type == 'checkbox' && field.checked)) {
+                values[field.name] = field.value;
+            }
+        });
+
+        // Post form
+        $.ajax({
+            type        : 'POST',
+            url         : '/app_dev.php/agenda/calendar/newshort',
+            data        : values,
+            success     : function(result) { callback( result ); }
+        });
+    }
+    $(function() {
+        $('#submit_short_calendar').on('click', function( e ){
+            e.preventDefault();
+            $("#cal_new_event").css( {display:"none"});
+            sendForm( $('#short_calendar'), function( response ){
+
+                var data = JSON.parse(response);
+                $('#calendar-holder').fullCalendar('renderEvent',
+                        {
+                            id: data.events.event.id,
+                            title: data.events.event.title,
+                            start: data.events.event.startdate,
+                            end: data.events.event.enddate,
+                            allDay: data.events.event.allday == 1 ? true : false
+                        }
+                );
+                $('#calendar-holder').fullCalendar('rerenderEvents')
+            });
+        });
+    });
+</script>
+
+<script>
+    $( document ).ready(function() {
+        $("#Novo_Planeamento_submit").remove();
+        $('#cancelar').on('click', function(e)  {
+            window.location.href = '/app_dev.php/NovoPlaneamento';
+            e.preventDefault();
+        });
+
+
+        $(".Novo_Planeamento_startdatetime").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        });
+
+        $('#Novo_Planeamento_startdatetime_time').timepicker({ 'timeFormat': 'H:i', 'step': 10 });
+        $('#Novo_Planeamento_enddatetime_time').timepicker({ 'timeFormat': 'H:i' , 'step': 10});
+
+        $(".Novo_Planeamento_enddatetime_date").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        });
+
+        $('#Novo_Planeamento_fnCliente').attr('required',true);
+        $('#Novo_Planeamento_ftGrupoparametros').attr('required',true);
+        $('#Novo_Planeamento_fnProduto').attr('required',true);
+
+
+    });
+</script>
+

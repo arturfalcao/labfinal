@@ -1,0 +1,165 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TModelosparametro
+ *
+ * @ORM\Table(name="t_modelosparametro", uniqueConstraints={@ORM\UniqueConstraint(name="IX_t_modelosparametro_descricao", columns={"ft_descricao"})}, indexes={@ORM\Index(name="IDX_D04F739D8A7894DE", columns={"fn_id_laboratorio"}), @ORM\Index(name="IDX_D04F739D1909E299", columns={"fn_id_metodo"}), @ORM\Index(name="IDX_D04F739D5D2AB5F4", columns={"fn_id_tecnica"}), @ORM\Index(name="IDX_D04F739D63E11BFC", columns={"fn_id_areaensaio"}), @ORM\Index(name="IDX_D04F739DE5DC4C23", columns={"fn_id_familiaparametro"}), @ORM\Index(name="IDX_D04F739D2B686C80", columns={"fn_id_modeloresultado"}), @ORM\Index(name="IDX_D04F739D9CB432B6", columns={"fn_id_frasco"})})
+ * @ORM\Entity
+ */
+class TModelosparametro
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fb_activo", type="bigint", nullable=true)
+     */
+    private $fbActivo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_descricao", type="string", length=100, nullable=false)
+     */
+    private $ftDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_formulaquimica", type="string", length=50, nullable=true)
+     */
+    private $ftFormulaquimica;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_precocompra", type="decimal", precision=8, scale=2, nullable=false)
+     */
+    private $fnPrecocompra;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_precovenda", type="decimal", precision=8, scale=2, nullable=false)
+     */
+    private $fnPrecovenda;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_factorcorreccao", type="decimal", precision=10, scale=5, nullable=false)
+     */
+    private $fnFactorcorreccao;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fn_nrdiasparaexecucao", type="boolean", nullable=false)
+     */
+    private $fnNrdiasparaexecucao;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_acreditado", type="boolean", nullable=false)
+     */
+    private $fbAcreditado;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_volumeminimo", type="integer", nullable=true)
+     */
+    private $fnVolumeminimo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_observacao", type="string", length=300, nullable=true)
+     */
+    private $ftObservacao;
+
+    /**
+     * @var \TFrascos
+     *
+     * @ORM\ManyToOne(targetEntity="TFrascos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_frasco", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnFrasco;
+
+    /**
+     * @var \TMetodos
+     *
+     * @ORM\ManyToOne(targetEntity="TMetodos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_metodo", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnMetodo;
+
+    /**
+     * @var \TModelosresultados
+     *
+     * @ORM\ManyToOne(targetEntity="TModelosresultados")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_modeloresultado", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnModeloresultado;
+
+    /**
+     * @var \TTecnicas
+     *
+     * @ORM\ManyToOne(targetEntity="TTecnicas")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_tecnica", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnTecnica;
+
+    /**
+     * @var \TAreasensaio
+     *
+     * @ORM\ManyToOne(targetEntity="TAreasensaio")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_areaensaio", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnAreaensaio;
+
+    /**
+     * @var \TLaboratorios
+     *
+     * @ORM\ManyToOne(targetEntity="TLaboratorios")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_laboratorio", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnLaboratorio;
+
+    /**
+     * @var \TFamiliasparametros
+     *
+     * @ORM\ManyToOne(targetEntity="TFamiliasparametros")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_familiaparametro", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnFamiliaparametro;
+
+
+}

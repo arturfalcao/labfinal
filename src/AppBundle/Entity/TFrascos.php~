@@ -1,0 +1,81 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TFrascos
+ *
+ * @ORM\Table(name="t_frascos", uniqueConstraints={@ORM\UniqueConstraint(name="IX_t_frascos_descricao", columns={"ft_descricao"}), @ORM\UniqueConstraint(name="IX_t_frascos_codigo", columns={"ft_codigo"})})
+ * @ORM\Entity
+ */
+class TFrascos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_codigo", type="string", length=20, nullable=false)
+     */
+    private $ftCodigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_descricao", type="string", length=100, nullable=false)
+     */
+    private $ftDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_alias", type="string", length=100, nullable=true)
+     */
+    private $ftAlias;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_observacao", type="string", length=300, nullable=true)
+     */
+    private $ftObservacao;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_capacidade", type="integer", nullable=true)
+     */
+    private $fnCapacidade;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id_tipomaterial", type="bigint", nullable=true)
+     */
+    private $fnIdTipomaterial;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_esteril", type="boolean", nullable=true)
+     */
+    private $fbEsteril;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id_aditivo", type="bigint", nullable=true)
+     */
+    private $fnIdAditivo;
+
+
+}

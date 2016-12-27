@@ -1,0 +1,108 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TModelosresultados
+ *
+ * @ORM\Table(name="t_modelosresultados", indexes={@ORM\Index(name="IDX_7AF2430B9BD428BC", columns={"fn_id_tipoarredondamento"}), @ORM\Index(name="IDX_7AF2430BF2A8B520", columns={"fn_id_unidade"})})
+ * @ORM\Entity
+ */
+class TModelosresultados
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_activo", type="boolean", nullable=false)
+     */
+    private $fbActivo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_incluirnorelatorio", type="boolean", nullable=false)
+     */
+    private $fbIncluirnorelatorio;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_gamavalores", type="boolean", nullable=false)
+     */
+    private $fbGamavalores;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_maximo", type="decimal", precision=10, scale=5, nullable=true)
+     */
+    private $fnMaximo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_minimo", type="decimal", precision=10, scale=5, nullable=true)
+     */
+    private $fnMinimo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_mensagemutilizador", type="string", length=200, nullable=true)
+     */
+    private $ftMensagemutilizador;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_descricao", type="string", length=100, nullable=false)
+     */
+    private $ftDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="fn_limitequantificacao", type="decimal", precision=10, scale=5, nullable=false)
+     */
+    private $fnLimitequantificacao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_observacao", type="string", length=300, nullable=true)
+     */
+    private $ftObservacao;
+
+    /**
+     * @var \TUnidadesmedida
+     *
+     * @ORM\ManyToOne(targetEntity="TUnidadesmedida")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_unidade", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnUnidade;
+
+    /**
+     * @var \TTiposarredondamento
+     *
+     * @ORM\ManyToOne(targetEntity="TTiposarredondamento")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="fn_id_tipoarredondamento", referencedColumnName="fn_id")
+     * })
+     */
+    private $fnTipoarredondamento;
+
+
+}

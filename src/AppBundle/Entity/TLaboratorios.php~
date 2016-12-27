@@ -1,0 +1,130 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TLaboratorios
+ *
+ * @ORM\Table(name="t_laboratorios", uniqueConstraints={@ORM\UniqueConstraint(name="IX_t_laboratorios_nrcontribuinte", columns={"ft_nclaboratorio"}), @ORM\UniqueConstraint(name="IX_t_laboratorios_nome", columns={"ft_nome"}), @ORM\UniqueConstraint(name="IX_t_laboratorios_codigo", columns={"ft_codigo"})})
+ * @ORM\Entity
+ */
+class TLaboratorios
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_nclaboratorio", type="string", length=12, nullable=false)
+     */
+    private $ftNclaboratorio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_codigo", type="string", length=20, nullable=false)
+     */
+    private $ftCodigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_nome", type="string", length=100, nullable=false)
+     */
+    private $ftNome;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_alias", type="string", length=100, nullable=true)
+     */
+    private $ftAlias;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_morada", type="string", length=100, nullable=false)
+     */
+    private $ftMorada;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_codpostal", type="string", length=10, nullable=false)
+     */
+    private $ftCodpostal;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_localidade", type="string", length=50, nullable=false)
+     */
+    private $ftLocalidade;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_pais", type="string", length=20, nullable=false)
+     */
+    private $ftPais;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_telefone", type="string", length=20, nullable=false)
+     */
+    private $ftTelefone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_fax", type="string", length=20, nullable=false)
+     */
+    private $ftFax;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_email", type="string", length=100, nullable=false)
+     */
+    private $ftEmail;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_observacao", type="string", length=300, nullable=true)
+     */
+    private $ftObservacao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_nomecontacto", type="string", length=100, nullable=true)
+     */
+    private $ftNomecontacto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_telefonecontacto", type="string", length=20, nullable=true)
+     */
+    private $ftTelefonecontacto;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_emailcontacto", type="string", length=100, nullable=true)
+     */
+    private $ftEmailcontacto;
+
+
+}

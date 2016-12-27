@@ -1,0 +1,53 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ListaTrabalhos
+ *
+ * @ORM\Table(name="lista_trabalhos")
+ * @ORM\Entity
+ */
+class ListaTrabalhos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fd_fecho", type="datetime", nullable=true)
+     */
+    private $datafecho;
+
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fd_emissao", type="datetime", nullable=true)
+     */
+    private $dataemissao;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_concluido", type="integer")
+     */
+
+    private $concluido=0;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="TParametrosAmostra", mappedBy="fnIdlista")
+     */
+    protected $id_parametro_amostra;
+
+}

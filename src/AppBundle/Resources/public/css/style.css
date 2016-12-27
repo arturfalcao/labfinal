@@ -1,0 +1,710 @@
+/*
+Theme Name:
+Theme URI:          http://
+Description:
+Version:            1.0.0
+Author:
+Author URI:
+*/
+@font-face {
+    font-family: 'montserratlight';
+    src: url("../fonts/montserrat-light-webfont.eot");
+    src: url("../fonts/montserrat-light-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat-light-webfont.woff2") format("woff2"), url("../fonts/montserrat-light-webfont.woff") format("woff"), url("../fonts/montserrat-light-webfont.ttf") format("truetype"), url("../fonts/montserrat-light-webfont.svg#montserratlight") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserratregular';
+    src: url("../fonts/montserrat-regular-webfont.eot");
+    src: url("../fonts/montserrat-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat-regular-webfont.woff2") format("woff2"), url("../fonts/montserrat-regular-webfont.woff") format("woff"), url("../fonts/montserrat-regular-webfont.ttf") format("truetype"), url("../fonts/montserrat-regular-webfont.svg#montserratregular") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserratsemi_bold';
+    src: url("../fonts/montserrat-semibold-webfont.eot");
+    src: url("../fonts/montserrat-semibold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat-semibold-webfont.woff2") format("woff2"), url("../fonts/montserrat-semibold-webfont.woff") format("woff"), url("../fonts/montserrat-semibold-webfont.ttf") format("truetype"), url("../fonts/montserrat-semibold-webfont.svg#montserratsemi_bold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'montserratbold';
+    src: url("../fonts/montserrat-bold-webfont.eot");
+    src: url("../fonts/montserrat-bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/montserrat-bold-webfont.woff2") format("woff2"), url("../fonts/montserrat-bold-webfont.woff") format("woff"), url("../fonts/montserrat-bold-webfont.ttf") format("truetype"), url("../fonts/montserrat-bold-webfont.svg#montserratbold") format("svg");
+    font-weight: normal;
+    font-style: normal;
+}
+/* line 52, ../scss/_fonts.scss */
+section.login form label, section.login form a, section.login p {
+    font-family: 'montserratlight', sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 14px;
+}
+
+body {
+
+}
+
+/* line 23, ../scss/style.scss */
+input[type="text"], input[type="password"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="month"], input[type="week"], input[type="email"], input[type="number"], input[type="search"], input[type="tel"], input[type="time"], input[type="url"], input[type="color"], textarea {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    /*-ms-border-radius: 2px;
+    -o-border-radius: 2px;*/
+    border-radius: 2px;
+}
+
+/* line 27, ../scss/style.scss */
+input[type="text"], input[type="password"] {
+    min-height: 2.5rem!important;
+    height: 2.5rem!important;
+}
+
+/* line 32, ../scss/style.scss */
+section.login form .button {
+    font-size: 1.0625rem;
+    text-transform: uppercase;
+    color: #fff;
+    background: #4cc3b8;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    /*-ms-border-radius: 2px;
+    -o-border-radius: 2px;*/
+    border-radius: 2px;
+}
+
+/* line 40, ../scss/style.scss */
+::-webkit-input-placeholder {
+    color: #9993a3;
+    font-size: 0.875rem;
+}
+
+/* line 41, ../scss/style.scss */
+:-moz-placeholder {
+    color: #9993a3;
+    font-size: 0.875rem;
+}
+
+/* line 42, ../scss/style.scss */
+::-moz-placeholder {
+    color: #9993a3;
+    font-size: 0.875rem;
+}
+
+/* line 43, ../scss/style.scss */
+:-ms-input-placeholder {
+    color: #9993a3;
+    font-size: 0.875rem;
+}
+
+/* line 45, ../scss/style.scss */
+.valign-middle {
+    display: table;
+    height: 100vh;
+}
+
+/* line 49, ../scss/style.scss */
+.valign-middle .columns {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+/* line 53, ../scss/style.scss */
+.valign-middle .columns,
+.valign-middle [class*="column"] + [class*="column"]:last-child {
+    float: none;
+}
+
+/* line 61, ../scss/style.scss */
+
+/* line 66, ../scss/style.scss */
+section.login .login-logo {
+    margin: 0 auto 3.75rem auto;
+    display: block;
+}
+/* line 71, ../scss/style.scss */
+section.login form {
+    border-bottom: 1px solid rgba(153, 147, 163, 0.2);
+    padding-bottom: 0.9375rem;
+    margin-bottom: 0.9375rem;
+}
+/* line 75, ../scss/style.scss */
+section.login form input {
+    padding-left: 0.9375rem;
+    padding-right: 3.125rem;
+}
+/* line 79, ../scss/style.scss */
+section.login form input[type=text] {
+    background: rgba(255, 255, 255, 0.7) url(images/name_icon.png) no-repeat 95% 50%;
+}
+/* line 81, ../scss/style.scss */
+section.login form input[type=text]:hover, section.login form input[type=text]:active, section.login form input[type=text]:focus {
+    background: white url(images/name_icon.png) no-repeat 95% 50%;
+}
+/* line 85, ../scss/style.scss */
+section.login form input[type=password] {
+    background: rgba(255, 255, 255, 0.7) url(images/pass_icon.png) no-repeat 95% 50%;
+}
+/* line 87, ../scss/style.scss */
+section.login form input[type=password]:hover, section.login form input[type=password]:active, section.login form input[type=password]:focus {
+    background: white url(images/pass_icon.png) no-repeat 95% 50%;
+}
+/* line 91, ../scss/style.scss */
+section.login form label {
+    color: #9993a3;
+    font-size: 0.875rem;
+}
+/* line 96, ../scss/style.scss */
+section.login form a {
+    color: #9993a3;
+    font-size: 0.8125rem;
+    padding-top: 0.1875rem;
+    font-style: italic;
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    /*-ms-transition: all 0.1s ease-in;*/
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+}
+/* line 103, ../scss/style.scss */
+section.login form a:hover, section.login form a:active, section.login form a:focus {
+    border-bottom: 1px solid #9993a3;
+}
+/* line 107, ../scss/style.scss */
+section.login form .button {
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    /*-ms-transition: all 0.1s ease-in;*/
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+}
+/* line 110, ../scss/style.scss */
+section.login form .button:hover, section.login form .button:active, section.login form .button:focus {
+    opacity: 0.9;
+    filter: alpha(opacity=90);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    /*-khtml-opacity: 0.9;*/
+    -moz-opacity: 0.9;
+}
+/* line 116, ../scss/style.scss */
+section.login p {
+    font-size: 0.75rem;
+    color: rgba(153, 147, 163, 0.8);
+    font-style: italic;
+}
+.row {min-width:100% !important;}
+
+
+.right-side{
+    margin-left: 0;
+}
+
+.sonata-ba-filter .select2-container{
+    width: 100% !important;
+    float: left;
+}
+
+.sonata-ba-filter input{
+    width: 100% !important;
+    float: left;
+}
+
+.sonata-ba-filter label{
+    width: 100% !important;
+    float: left;
+}
+
+.sonata-ba-filter .form-group{
+    float: left;
+}
+
+
+.mainmenu, .submenu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* make ALL links (main and submenu) have padding and background color */
+.mainmenu a {
+    display: block;
+    background: none;
+    text-decoration: none;
+    padding: 10px;
+    color: #000;
+}
+
+
+
+
+/* when hovering over a .mainmenu item,
+  display the submenu inside it.
+  we're changing the submenu's max-height from 0 to 200px;
+*/
+
+.mainmenu li:hover .submenu {
+    display: block;
+    max-height: 700px;
+}
+.mainmenu >li{
+    position: relative;
+}
+/*
+  we now overwrite the background-color for .submenu links only.
+  CSS reads down the page, so code at the bottom will overwrite the code at the top.
+*/
+
+.submenu a {
+    padding-top: 10px;
+    padding-left: 24px;
+}
+
+/* hover behaviour for links inside .submenu */
+.submenu a:hover {
+    color: rgba(76,195,184,1);
+}
+
+/* this is the initial state of all submenus.
+  we set it to max-height: 0, and hide the overflowed content.
+*/
+.submenu {
+    overflow: hidden;
+    max-height: 0;
+    -webkit-transition: all 0.5s ease-out;
+    position: absolute;
+    width: 250px;
+    left: 88% !important;
+    z-index: 99999999;
+    max-width: 638px;
+    background: #fff;
+    box-shadow: 1px 2px 2px #dfdfdf;
+}
+ 
+.subtitle{
+    padding: 23px 23px 9px 23px;
+    text-transform: uppercase;
+}
+
+.menu_principal{
+    width: 100%;
+
+}
+
+.mainmenu a.menu_planeamento{
+    background: url(../images/planeamento.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+
+.mainmenu a.menu_planeamento:hover, .mainmenu a.menu_planeamento:active, .mainmenu a.menu_planeamento:focus{
+    background: url(../images/planeamento_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_amostras{
+    background: url(../images/amostras.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_amostras:hover, .mainmenu a.menu_amostras:active, .mainmenu a.menu_amostras:focus{
+    background: url(../images/amostras_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_resultados{
+    background: url(../images/resultados.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_resultados:hover, .mainmenu a.menu_resultados:active, .mainmenu a.menu_resultados:focus{
+    background: url(../images/resultados_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+
+.mainmenu a.menu_configuracoes{
+    background: url(../images/configuracoes.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_configuracoes:hover, .mainmenu a.menu_configuracoes:active, .mainmenu a.menu_configuracoes:focus{
+    background: url(../images/configuracoes_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_listagens{
+    background: url(../images/boletins.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_listagens:hover, .mainmenu a.menu_listagens:active, .mainmenu a.menu_listagens:focus{
+    background: url(../images/boletins_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_cartas{
+    background: url(../images/cartas-controlo.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+.mainmenu a.menu_cartas:hover, .mainmenu a.menu_cartas:active, .mainmenu a.menu_cartas:focus{
+    background: url(../images/cartas-controlo_active.png) no-repeat center center;
+    width: 50px;
+    height: 69px;
+    padding: 0;
+    margin: 0;
+}
+
+
+.menu_direita{
+    background: url(../images/side_apps.png) no-repeat center center;
+    width: 128px;
+    height: 69px;
+}
+
+/* jose*/
+.mainmenu{
+    margin-top: 1em;
+}
+
+.mainmenu a.menu_planeamento{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_planeamento:hover{
+    width: 100%!important;
+    padding-left: 19px;
+}
+
+.submenu{
+    top: 0!important;
+    
+}
+
+.grande_big{
+    margin-top: -180px;
+}
+
+.menu_principal > ul > li > a:hover, .menu_principal > ul > li > a:active, .menu_principal > ul > li > a:focus,
+.menu_principal > ul > li > a:active {
+    color: #171f2e;
+    background-color: #faf9fa!important;
+
+}
+
+.menu_hover{
+    display: none;
+}
+
+.menu_principal > ul > li:hover .menu_hover{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color:#4cc3b8;
+    width: 3px;
+}
+
+.mainmenu a.menu_amostras{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_amostras:hover{
+    width: 100%!important;
+    padding-left: 22px;
+}
+
+.mainmenu a.menu_resultados{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_resultados:hover{
+    width: 100%!important;
+    padding-left: 22px;
+}
+
+.mainmenu a.menu_configuracoes{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_configuracoes:hover{
+    width: 100%!important;
+    padding-left: 22px;
+}
+
+.mainmenu a.menu_listagens{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_listagens:hover{
+    width: 100%!important;
+    padding-left: 22px;
+}
+
+.mainmenu a.menu_cartas{
+    width: 100%!important;
+    padding-left: 25px;
+}
+
+.mainmenu a.menu_cartas:hover{
+    width: 100%!important;
+    padding-left: 22px;
+}
+
+.mainmenu > li > ul.submenu li a
+{
+    text-decoration: none!important;
+}
+/* fim*/
+
+.new_cal_element form{
+    margin-top: 41px;
+    margin-left: 58px;
+}
+
+.new_cal_element form .form-group{
+    float: left;
+    margin-right: 98px ;
+}
+
+.new_cal_element form input[type='text']{
+    width: 394px;
+    min-height: 26px;
+    height: 39px;
+}
+.new_cal_element form textarea{
+    width: 394px;
+    min-height: 26px;
+    height: 97px;
+}
+
+
+.modeloslistas_form input[type="text"]{
+    display: none;
+}
+
+
+
+.mce-tinymce {
+    float: left !important;
+    width: 100% !important;
+}
+
+.display_none{
+    display: none;
+}
+
+.click_eventos{
+    width: 102px;
+    height: 67px;
+    float: left;
+}
+
+.amostra_content{
+    float: left;
+    margin-top: 22px;
+}
+.id_amostra{
+    text-align: left;
+    background-color: lightgray;
+    color: white;
+    font-size: 19px;
+    padding-left: 11px;
+    font-weight: bold;
+}
+
+.nome_parametro,.tipo_lista{
+    float: left;
+    padding-left: 20px;
+}
+
+/*jose */
+.new_cal_element form {
+    margin-top: 0;
+    margin-left: 0;
+}
+
+.new_cal_element form input[type='text']{
+    width: 100%;
+}
+
+.new_cal_element form textarea {
+    width: 100%;
+}
+
+.new_cal_element form .form-group {
+    margin-right: 40px;
+}
+
+.input-group .form-control { z-index:0!important;}
+
+
+/* fim*/
+
+/*botões de edição*/
+
+#Novo_Planeamento_submit{
+    color: #65c0b2!important;
+    background: white!important;
+    outline: none;
+}
+
+#form_submit{
+    color: #f4543c!important;
+    background: white!important;
+    outline:none;
+}
+
+#datetimepicker1 > input, #datetimepicker2 > input{
+    width: 160px!important;
+    border-radius: 0!important;
+    border-bottom-left-radius: 2px!important;
+    border-top-left-radius: 2px!important;
+}
+
+.input-group-addon{
+    background-color: transparent;
+    border: 1px solid #9993a3;
+    border-radius: 2px;
+}
+
+/* media querys*/
+@media all and (max-width: 1025px) and (min-width: 960px){
+    body .menu_direita {
+        position: relative;
+        border-left: 1px solid #DFDFDF;
+        height: 70px!important;
+        width: 60px!important;
+    }
+    body .header{
+        height: 70px;
+    }
+
+    body h6.title{
+        padding: 19px 0 0 1.5625rem !important;
+    }
+
+    body .button{
+        margin-top: 11px!important;
+    }
+
+    body .Cliente_amostra .select2-container{
+        width: 69%!important;
+    }
+
+    body .Caracterizacao_amostra .select2-container{
+        width: 80%!important;
+    }
+
+    body .Lancamento_amostra .select2-container{
+        width: 80%!important;
+    }
+
+    body .form-group{
+        margin-bottom: 0!important;
+    }
+
+    body .Lote_amostra .sonata-ba-collapsed-fields{
+        padding: 10px !important;
+        padding-bottom: 0!important;
+        height: 325px!important;
+    }
+
+    body .Lancamento_amostra{
+        margin-top: -695px!important;
+    }
+
+    body .Lote_amostra{
+        margin-top: -485px!important;
+    }
+
+    body .Dados_amostra{
+        margin-top: -115px!important;
+        margin-bottom: 20px!important;
+    }
+
+    body .largura{
+        width: 80%!important;
+    }
+
+    body .largura_2 {
+        width: 55% !important;
+    }
+
+    body .largura_3 {
+        width: 58% !important;
+    }
+
+    body .largura_4 {
+        width: 68% !important;
+    }
+
+    body .mainmenu a{
+        height: 58px!important;
+    }
+
+    body .submenu{
+        left: 63px!important;
+    }
+
+    body .select2-container .select2-choice > .select2-chosen{
+        max-width: 110px;
+    }
+
+    body .TabelaModeloresultados{
+        overflow-x: scroll!important;
+    }
+
+    body .sideBarRight{
+        margin-top: 9px!important;
+    }
+
+    body .grande_big{
+        margin-top: -190px!important;
+    }
+
+    body .submenu a{
+        padding-top:5px!important;
+        padding-bottom:5px!important;
+        height:40px!important;
+    }
+
+    body .circulo_menu_direita{
+        margin-left: 40px!important;
+        margin-top: 18px!important;
+    }
+
+    body .new-bottom-section a.user-menu i.availability{
+        margin-right: 2px!important;
+    }
+
+}

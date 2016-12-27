@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Agenda list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Descricao</th>
+                <th>Startdatetime</th>
+                <th>Enddatetime</th>
+                <th>Alldayevent</th>
+                <th>Url</th>
+                <th>Bgcolor</th>
+                <th>Fgcolor</th>
+                <th>Cssclass</th>
+                <th>Id</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('agenda_show', { 'id': entity.id }) }}">{{ entity.title }}</a></td>
+                <td>{{ entity.descricao }}</td>
+                <td>{% if entity.startdatetime %}{{ entity.startdatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.enddatetime %}{{ entity.enddatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.alldayevent }}</td>
+                <td>{{ entity.url }}</td>
+                <td>{{ entity.bgcolor }}</td>
+                <td>{{ entity.fgcolor }}</td>
+                <td>{{ entity.cssclass }}</td>
+                <td>{{ entity.id }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('agenda_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('agenda_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('agenda_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

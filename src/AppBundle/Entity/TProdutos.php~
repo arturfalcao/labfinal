@@ -1,0 +1,88 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TProdutos
+ *
+ * @ORM\Table(name="t_produtos")
+ * @ORM\Entity
+ */
+class TProdutos
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_codigo", type="string", length=20, nullable=false)
+     */
+    private $ftCodigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_descricao", type="string", length=100, nullable=false)
+     */
+    private $ftDescricao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_alias", type="string", length=100, nullable=true)
+     */
+    private $ftAlias;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id_familiaproduto", type="bigint", nullable=false)
+     */
+    private $fnIdFamiliaproduto;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id_legislacao", type="bigint", nullable=false)
+     */
+    private $fnIdLegislacao;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_observacao", type="string", length=300, nullable=true)
+     */
+    private $ftObservacao;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_activo", type="boolean", nullable=false)
+     */
+    private $fbActivo;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_AcreditacaoAmostragem", type="boolean", nullable=false)
+     */
+    private $fbAcreditacaoamostragem;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="fb_AcreditacaoAmostragemMicro", type="boolean", nullable=false)
+     */
+    private $fbAcreditacaoamostragemmicro;
+
+
+}

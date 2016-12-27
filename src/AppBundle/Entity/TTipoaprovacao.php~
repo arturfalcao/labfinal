@@ -1,0 +1,39 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * TTipoaprovacao
+ *
+ * @ORM\Table(name="t_tipoaprovacao")
+ * @ORM\Entity
+ */
+class TTipoaprovacao
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="fn_id", type="bigint", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $fnId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_codigo", type="string", length=20, nullable=true)
+     */
+    private $ftCodigo;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ft_descricao", type="string", length=100, nullable=true)
+     */
+    private $ftDescricao;
+
+
+}

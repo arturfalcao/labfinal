@@ -1,0 +1,36 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TTiposarredondamento</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Fnid</th>
+                <td>{{ entity.fnId }}</td>
+            </tr>
+            <tr>
+                <th>Ftcodigo</th>
+                <td>{{ entity.ftCodigo }}</td>
+            </tr>
+            <tr>
+                <th>Ftdescricao</th>
+                <td>{{ entity.ftDescricao }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('ttiposarredondamento') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('ttiposarredondamento_edit', { 'id': entity.fnId }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

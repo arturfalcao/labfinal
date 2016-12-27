@@ -1,0 +1,108 @@
+
+
+{% include 'AppBundle::resources.html.twig' %}
+
+
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+{#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+{% endstylesheets %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+    {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/AdminLTE/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/jqueryui/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/select2/select2.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/css/styles.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/css/layout.css">
+
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/sonata.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/js/icheck/skins/minimal/minimal.css">
+
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/net/bootstrap-datetimepicker.min.css">
+    {#<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">#}
+
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/icheck/icheck.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/lang-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sonataadmin/vendor/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sonataadmin/vendor/select2/select2_locale_pt-PT.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap-datetimepicker.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>#}
+
+
+{% endblock %}
+
+
+{% block scripts -%}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>#}
+
+{% endblock %}
+
+<div class="new_cal_element">
+    <div class="row">
+        <div class="large-1 medium-1 columns no-padding" style="position:fixed;height: 100vh;border: 1px solid #DFDFDF;z-index: 5;padding: 0;">
+            {% include 'default/menu.html.twig' %}
+        </div>
+        <div class=" large-15 medium-15 columns">
+            <div class="row">
+
+                <div class="large-16 medium-16 columns" >
+                    {% include 'default/topheader_importacao.html.twig' %}
+                </div>
+            </div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row push-1" >
+
+                    {% block body -%}
+
+                        <form action="{{ path('importacaoamostra') }}" method="post" enctype="multipart/form-data">
+                            Por favor faça upload do ficheiro
+                            <input type="file" name="fileToUpload" id="fileToUpload">
+                            <input type="submit" value="Submeter" name="submit">
+                            {{ string}}
+                        </form>
+
+                    {% endblock %}
+                </div>
+
+
+        </div>
+    </div>
+</div>
+
+

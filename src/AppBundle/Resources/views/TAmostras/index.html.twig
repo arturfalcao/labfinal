@@ -1,0 +1,103 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TAmostras list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Fnid</th>
+                <th>Fnnumero</th>
+                <th>Ftserie</th>
+                <th>Fdcriacao</th>
+                <th>Fdcolheita</th>
+                <th>Fdrecepcao</th>
+                <th>Fdconclusao</th>
+                <th>Fdlimite</th>
+                <th>Ftresponsavelcolheita</th>
+                <th>Fnidoperador</th>
+                <th>Fnidmodelo</th>
+                <th>Fnidtipoaprovacao</th>
+                <th>Fdautorizacao</th>
+                <th>Fnidproduto</th>
+                <th>Ftorigem</th>
+                <th>Startdatetime</th>
+                <th>Enddatetime</th>
+                <th>Fnidlegislacao</th>
+                <th>Fttipoemissaorelatorio</th>
+                <th>Fbrelatorioemitido</th>
+                <th>Fdemissaorelatorio</th>
+                <th>Fnidtipo</th>
+                <th>Ftrefexterna</th>
+                <th>Ftconclusao</th>
+                <th>Ftobs</th>
+                <th>Fnidtipocontrolo</th>
+                <th>Fnidorcamento</th>
+                <th>Ftidestado</th>
+                <th>Fnidespecificacao</th>
+                <th>Ftcumpreespecificacao</th>
+                <th>Fdinicioanalise</th>
+                <th>Fbfacturada</th>
+                <th>Fnidrequisicaocliente</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('tamostras_show', { 'id': entity.fnId }) }}">{{ entity.fnId }}</a></td>
+                <td>{{ entity.fnNumero }}</td>
+                <td>{{ entity.ftSerie }}</td>
+                <td>{% if entity.fdCriacao %}{{ entity.fdCriacao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fdColheita %}{{ entity.fdColheita|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fdRecepcao %}{{ entity.fdRecepcao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fdConclusao %}{{ entity.fdConclusao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fdLimite %}{{ entity.fdLimite|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.ftResponsavelcolheita }}</td>
+                <td>{{ entity.fnIdOperador }}</td>
+                <td>{{ entity.fnIdModelo }}</td>
+                <td>{{ entity.fnIdTipoaprovacao }}</td>
+                <td>{% if entity.fdAutorizacao %}{{ entity.fdAutorizacao|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.fnIdProduto }}</td>
+                <td>{{ entity.ftOrigem }}</td>
+                <td>{% if entity.startdatetime %}{{ entity.startdatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.enddatetime %}{{ entity.enddatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.fnIdLegislacao }}</td>
+                <td>{{ entity.ftTipoemissaorelatorio }}</td>
+                <td>{{ entity.fbRelatorioemitido }}</td>
+                <td>{% if entity.fdEmissaorelatorio %}{{ entity.fdEmissaorelatorio|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.fnIdTipo }}</td>
+                <td>{{ entity.ftRefexterna }}</td>
+                <td>{{ entity.ftConclusao }}</td>
+                <td>{{ entity.ftObs }}</td>
+                <td>{{ entity.fnIdTipocontrolo }}</td>
+                <td>{{ entity.fnIdOrcamento }}</td>
+                <td>{{ entity.ftIdEstado }}</td>
+                <td>{{ entity.fnIdEspecificacao }}</td>
+                <td>{{ entity.ftCumpreespecificacao }}</td>
+                <td>{% if entity.fdInicioanalise %}{{ entity.fdInicioanalise|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.fbFacturada }}</td>
+                <td>{{ entity.fnIdRequisicaocliente }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('tamostras_show', { 'id': entity.fnId }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('tamostras_edit', { 'id': entity.fnId }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('tamostras_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

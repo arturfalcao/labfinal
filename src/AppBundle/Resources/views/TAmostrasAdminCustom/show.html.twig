@@ -1,0 +1,156 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>TAmostras</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Fnid</th>
+                <td>{{ entity.fnId }}</td>
+            </tr>
+            <tr>
+                <th>Fnnumero</th>
+                <td>{{ entity.fnNumero }}</td>
+            </tr>
+            <tr>
+                <th>Ftserie</th>
+                <td>{{ entity.ftSerie }}</td>
+            </tr>
+            <tr>
+                <th>Fdcriacao</th>
+                <td>{{ entity.fdCriacao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fdcolheita</th>
+                <td>{{ entity.fdColheita|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fdrecepcao</th>
+                <td>{{ entity.fdRecepcao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fdconclusao</th>
+                <td>{{ entity.fdConclusao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fdlimite</th>
+                <td>{{ entity.fdLimite|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Ftresponsavelcolheita</th>
+                <td>{{ entity.ftResponsavelcolheita }}</td>
+            </tr>
+            <tr>
+                <th>Fnidoperador</th>
+                <td>{{ entity.fnIdOperador }}</td>
+            </tr>
+            <tr>
+                <th>Fnidmodelo</th>
+                <td>{{ entity.fnIdModelo }}</td>
+            </tr>
+            <tr>
+                <th>Fnidtipoaprovacao</th>
+                <td>{{ entity.fnIdTipoaprovacao }}</td>
+            </tr>
+            <tr>
+                <th>Fdautorizacao</th>
+                <td>{{ entity.fdAutorizacao|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fnidproduto</th>
+                <td>{{ entity.fnIdProduto }}</td>
+            </tr>
+            <tr>
+                <th>Ftorigem</th>
+                <td>{{ entity.ftOrigem }}</td>
+            </tr>
+            <tr>
+                <th>Startdatetime</th>
+                <td>{{ entity.startdatetime|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Enddatetime</th>
+                <td>{{ entity.enddatetime|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fnidlegislacao</th>
+                <td>{{ entity.fnIdLegislacao }}</td>
+            </tr>
+            <tr>
+                <th>Fttipoemissaorelatorio</th>
+                <td>{{ entity.ftTipoemissaorelatorio }}</td>
+            </tr>
+            <tr>
+                <th>Fbrelatorioemitido</th>
+                <td>{{ entity.fbRelatorioemitido }}</td>
+            </tr>
+            <tr>
+                <th>Fdemissaorelatorio</th>
+                <td>{{ entity.fdEmissaorelatorio|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fnidtipo</th>
+                <td>{{ entity.fnIdTipo }}</td>
+            </tr>
+            <tr>
+                <th>Ftrefexterna</th>
+                <td>{{ entity.ftRefexterna }}</td>
+            </tr>
+            <tr>
+                <th>Ftconclusao</th>
+                <td>{{ entity.ftConclusao }}</td>
+            </tr>
+            <tr>
+                <th>Ftobs</th>
+                <td>{{ entity.ftObs }}</td>
+            </tr>
+            <tr>
+                <th>Fnidtipocontrolo</th>
+                <td>{{ entity.fnIdTipocontrolo }}</td>
+            </tr>
+            <tr>
+                <th>Fnidorcamento</th>
+                <td>{{ entity.fnIdOrcamento }}</td>
+            </tr>
+            <tr>
+                <th>Ftidestado</th>
+                <td>{{ entity.ftIdEstado }}</td>
+            </tr>
+            <tr>
+                <th>Fnidespecificacao</th>
+                <td>{{ entity.fnIdEspecificacao }}</td>
+            </tr>
+            <tr>
+                <th>Ftcumpreespecificacao</th>
+                <td>{{ entity.ftCumpreespecificacao }}</td>
+            </tr>
+            <tr>
+                <th>Fdinicioanalise</th>
+                <td>{{ entity.fdInicioanalise|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Fbfacturada</th>
+                <td>{{ entity.fbFacturada }}</td>
+            </tr>
+            <tr>
+                <th>Fnidrequisicaocliente</th>
+                <td>{{ entity.fnIdRequisicaocliente }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('tamostras') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('tamostras_edit', { 'id': entity.fnId }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

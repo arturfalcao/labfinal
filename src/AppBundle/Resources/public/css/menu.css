@@ -1,0 +1,422 @@
+
+/*
+ LEFT PANEL (MENU)
+*/
+/* line 1, ../scss/_menu-icons.scss */
+.menu-icon, .side-menu ul li a.menu-item-1 i, .side-menu ul li a.menu-item-2 i, .side-menu ul li a.menu-item-3 i, .side-menu ul li a.menu-item-4 i, .side-menu ul li a.menu-item-5 i, .side-menu ul li a.menu-item-6 i, .side-menu ul li a.menu-item-7 i, .side-menu ul li a.menu-item-8 i {
+    background: url(../images/menu-icons.png) no-repeat;
+    display: inline-block;
+    margin-left: 2.5rem;
+}
+
+/* line 8, ../scss/_menu-icons.scss */
+.menu-icon-menu-1, .side-menu ul li a.menu-item-1 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -20px;
+}
+
+/* line 14, ../scss/_menu-icons.scss */
+.menu-icon-menu-1-active, .side-menu ul li a:hover.menu-item-1 i, .side-menu ul li a:active.menu-item-1 i, .side-menu ul li a:focus.menu-item-1 i, .side-menu ul li a.active.menu-item-1 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -92px;
+}
+
+/* line 20, ../scss/_menu-icons.scss */
+.menu-icon-menu-2, .side-menu ul li a.menu-item-2 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -164px;
+}
+
+/* line 26, ../scss/_menu-icons.scss */
+.menu-icon-menu-2-active, .side-menu ul li a:hover.menu-item-2 i, .side-menu ul li a:active.menu-item-2 i, .side-menu ul li a:focus.menu-item-2 i, .side-menu ul li a.active.menu-item-2 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -236px;
+}
+
+/* line 32, ../scss/_menu-icons.scss */
+.menu-icon-menu-3, .side-menu ul li a.menu-item-3 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -308px;
+}
+
+/* line 38, ../scss/_menu-icons.scss */
+.menu-icon-menu-3-active, .side-menu ul li a:hover.menu-item-3 i, .side-menu ul li a:active.menu-item-3 i, .side-menu ul li a:focus.menu-item-3 i, .side-menu ul li a.active.menu-item-3 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -380px;
+}
+
+/* line 44, ../scss/_menu-icons.scss */
+.menu-icon-menu-4, .side-menu ul li a.menu-item-4 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -452px;
+}
+
+/* line 50, ../scss/_menu-icons.scss */
+.menu-icon-menu-4-active, .side-menu ul li a:hover.menu-item-4 i, .side-menu ul li a:active.menu-item-4 i, .side-menu ul li a:focus.menu-item-4 i, .side-menu ul li a.active.menu-item-4 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -524px;
+}
+
+/* line 56, ../scss/_menu-icons.scss */
+.menu-icon-menu-5, .side-menu ul li a.menu-item-5 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -596px;
+}
+
+/* line 62, ../scss/_menu-icons.scss */
+.menu-icon-menu-5-active, .side-menu ul li a:hover.menu-item-5 i, .side-menu ul li a:active.menu-item-5 i, .side-menu ul li a:focus.menu-item-5 i, .side-menu ul li a.active.menu-item-5 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -668px;
+}
+
+/* line 68, ../scss/_menu-icons.scss */
+.menu-icon-menu-6, .side-menu ul li a.menu-item-6 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -740px;
+}
+
+/* line 74, ../scss/_menu-icons.scss */
+.menu-icon-menu-6-active, .side-menu ul li a:hover.menu-item-6 i, .side-menu ul li a:active.menu-item-6 i, .side-menu ul li a:focus.menu-item-6 i, .side-menu ul li a.active.menu-item-6 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -812px;
+}
+
+/* line 80, ../scss/_menu-icons.scss */
+.menu-icon-menu-7, .side-menu ul li a.menu-item-7 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -884px;
+}
+
+/* line 86, ../scss/_menu-icons.scss */
+.menu-icon-menu-7-active, .side-menu ul li a:hover.menu-item-7 i, .side-menu ul li a:active.menu-item-7 i, .side-menu ul li a:focus.menu-item-7 i, .side-menu ul li a.active.menu-item-7 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -956px;
+}
+
+/* line 92, ../scss/_menu-icons.scss */
+.menu-icon-menu-8, .side-menu ul li a.menu-item-8 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -1028px;
+}
+
+/* line 98, ../scss/_menu-icons.scss */
+.menu-icon-menu-8-active, .side-menu ul li a:hover.menu-item-8 i, .side-menu ul li a:active.menu-item-8 i, .side-menu ul li a:focus.menu-item-8 i, .side-menu ul li a.active.menu-item-8 i {
+    width: 32px;
+    height: 32px;
+    background-position: -20px -1100px;
+}
+
+/* line 1, ../scss/_side-menu.scss */
+.side-menu {
+    position: fixed;
+    height: 100vh;
+    width: 6.75rem;
+    border-right: 1px solid #dfdfdf;
+    background: #fff;
+    z-index: 300;
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    /*-ms-transition: all 0.1s ease-in;*/
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+}
+@media only screen and (min-width: 64.0625em) {
+    /* line 1, ../scss/_side-menu.scss */
+    .side-menu {
+        width: 6.75rem;
+    }
+}
+/* line 13, ../scss/_side-menu.scss */
+.side-menu:hover {
+    width: 351px;
+}
+/* line 15, ../scss/_side-menu.scss */
+.side-menu:hover li {
+    width: 350px;
+}
+/* line 18, ../scss/_side-menu.scss */
+.side-menu:hover img {
+    margin: 1.5625rem auto;
+    display: block;
+}
+/* line 23, ../scss/_side-menu.scss */
+.side-menu:hover span {
+    display: inline-block;
+    position: absolute;
+    left: 100px;
+    top: 27px;
+}
+/* line 30, ../scss/_side-menu.scss */
+.side-menu img {
+    margin: 1.65em 0.4rem 0;
+}
+/* line 34, ../scss/_side-menu.scss */
+.side-menu ul {
+    margin: 1.875rem 0 0;
+}
+/* line 36, ../scss/_side-menu.scss */
+.side-menu ul li {
+    list-style-type: none;
+    position: relative;
+}
+/* line 40, ../scss/_side-menu.scss */
+.side-menu ul li a {
+    color: #9993a3;
+    font-size: 1rem;
+    display: block;
+    padding: 1.4375rem 0.9375rem 1.4375rem 0;
+}
+/* line 98, ../scss/_side-menu.scss */
+.side-menu ul li a:hover, .side-menu ul li a:active, .side-menu ul li a:focus, .side-menu ul li a.active {
+    color: #171f2e;
+    background: #faf9fa;
+    border-left: 6px solid #4cc3b8;
+}
+/* line 104, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-1 i, .side-menu ul li a:active.menu-item-1 i, .side-menu ul li a:focus.menu-item-1 i, .side-menu ul li a.active.menu-item-1 i {
+    margin-left: 2.1rem;
+}
+/* line 110, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-2 i, .side-menu ul li a:active.menu-item-2 i, .side-menu ul li a:focus.menu-item-2 i, .side-menu ul li a.active.menu-item-2 i {
+    margin-left: 2.1rem;
+}
+/* line 116, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-3 i, .side-menu ul li a:active.menu-item-3 i, .side-menu ul li a:focus.menu-item-3 i, .side-menu ul li a.active.menu-item-3 i {
+    margin-left: 2.1rem;
+}
+/* line 122, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-4 i, .side-menu ul li a:active.menu-item-4 i, .side-menu ul li a:focus.menu-item-4 i, .side-menu ul li a.active.menu-item-4 i {
+    margin-left: 2.1rem;
+}
+/* line 128, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-5 i, .side-menu ul li a:active.menu-item-5 i, .side-menu ul li a:focus.menu-item-5 i, .side-menu ul li a.active.menu-item-5 i {
+    margin-left: 2.1rem;
+}
+/* line 134, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-6 i, .side-menu ul li a:active.menu-item-6 i, .side-menu ul li a:focus.menu-item-6 i, .side-menu ul li a.active.menu-item-6 i {
+    margin-left: 2.1rem;
+}
+/* line 140, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-7 i, .side-menu ul li a:active.menu-item-7 i, .side-menu ul li a:focus.menu-item-7 i, .side-menu ul li a.active.menu-item-7 i {
+    margin-left: 2.1rem;
+}
+/* line 146, ../scss/_side-menu.scss */
+.side-menu ul li a:hover.menu-item-8 i, .side-menu ul li a:active.menu-item-8 i, .side-menu ul li a:focus.menu-item-8 i, .side-menu ul li a.active.menu-item-8 i {
+    margin-left: 2.1rem;
+}
+/* line 154, ../scss/_side-menu.scss */
+.side-menu ul li a span {
+    display: none;
+}
+.columns.nopadding {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* header */
+/* line 205, ../scss/style.scss */
+header {
+    border-bottom: 1px solid #dfdfdf;
+    padding: 1.375rem 0;
+}
+/* line 208, ../scss/style.scss */
+header .title {
+    font-size: 1.25rem;
+    color: #171f2e;
+    padding: 1.5rem 0 0 1.5625rem;
+    margin: 0;
+}
+/* line 214, ../scss/style.scss */
+header .button {
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    /*-ms-transition: all 0.1s ease-in;*/
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    text-transform: none;
+    font-size: 1rem;
+    padding: 1.0625rem 3.75rem;
+    margin: 0.5rem  1.5625rem 0 0;
+    background: rgba(76,195,184,1);
+    border-radius: 2px;
+}
+/* line 221, ../scss/style.scss */
+header .button:hover, header .button:active, header .button:focus {
+    background: rgba(76,195,184,0.7) !important;
+}
+
+/* dropdown*/
+/* line 2, ../scss/_dropdown.scss */
+.dropit {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* line 7, ../scss/_dropdown.scss */
+.dropit .dropit-trigger {
+    position: relative;
+}
+
+/* line 8, ../scss/_dropdown.scss */
+.dropit .dropit-submenu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    /* dropdown left or right */
+    z-index: 1000;
+    display: none;
+    min-width: 150px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* line 19, ../scss/_dropdown.scss */
+.dropit .dropit-open .dropit-submenu {
+    display: block;
+}
+/* line 250, ../scss/style.scss */
+.profile {
+    width: 100%;
+    height: 6.25rem;
+    margin-left: -1px;
+}
+/* line 257, ../scss/style.scss */
+.profile .dropit-trigger {
+    float: left;
+    width: 100%;
+}
+
+.profile li{
+    list-style: none;
+}
+/* line 261, ../scss/style.scss */
+.profile a.user-menu {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+/* line 265, ../scss/style.scss */
+.profile a.user-menu .availability-wrap {
+    display: inline-block;
+    position: relative;
+}
+/* line 269, ../scss/style.scss */
+.profile a.user-menu img {
+    display: inline-block;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    /*-ms-border-radius: 50px;
+    -o-border-radius: 50px;*/
+    border-radius: 50px;
+}
+/* line 273, ../scss/style.scss */
+.profile a.user-menu i.availability {
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    /*-ms-border-radius: 50px;
+    -o-border-radius: 50px;*/
+    border-radius: 50px;
+    border: 2px solid #fff;
+    right: -2px;
+    top: 0;
+}
+/* line 281, ../scss/style.scss */
+.profile a.user-menu i.availability.available {
+    background: #4cc3b8;
+}
+/* line 284, ../scss/style.scss */
+.profile a.user-menu i.availability.unavailable {
+    background: #db1d45;
+}
+/* line 288, ../scss/style.scss */
+.profile a.user-menu p {
+    display: inline-block;
+    color: #171f2e;
+    background: url(../images/arrow.png) no-repeat center right;
+    padding: 0 1.5625rem 0 0.9375rem;
+}
+/* line 295, ../scss/style.scss */
+.profile .dropit-submenu {
+    background: #fff;
+    margin-top: 1.625rem;
+    text-align: left;
+    width: 100%;
+}
+/* line 300, ../scss/style.scss */
+.profile .dropit-submenu li {
+    border-bottom: 1px solid #dfdfdf;
+    float: left;
+    width: 100%;
+    position: relative;
+}
+/* line 305, ../scss/style.scss */
+.profile .dropit-submenu li a {
+    color: #171f2e;
+    padding: 1.5625rem 0;
+    display: block;
+    -webkit-transition: all 0.1s ease-in;
+    -moz-transition: all 0.1s ease-in;
+    /*-ms-transition: all 0.1s ease-in;*/
+    -o-transition: all 0.1s ease-in;
+    transition: all 0.1s ease-in;
+    float: left;
+    width: 100%;
+}
+/* line 312, ../scss/style.scss */
+.profile .dropit-submenu li a:hover, .side-apps .profile .dropit-submenu li a:active, .side-apps .profile .dropit-submenu li a:focus {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    /*-khtml-opacity: 0.7*/;
+    -moz-opacity: 0.7;
+}
+/* line 315, ../scss/style.scss */
+.profile .dropit-submenu li a span {
+    float: left;
+    display: inline-block;
+    padding-left: 1.5625rem;
+}
+/* line 320, ../scss/style.scss */
+.profile .dropit-submenu li a i {
+    display: inline-block;
+    float: left;
+    margin-left: 1.5625rem;
+}
+/* line 349, ../scss/style.scss */
+.profile .dropit-submenu li a b.message-count {
+    font-size: 0.6875rem;
+    color: #fff;
+    background: #db1d45;
+    padding: 4px;
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    /*-ms-border-radius: 50px;
+    -o-border-radius: 50px;*/
+    border-radius: 50px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+}

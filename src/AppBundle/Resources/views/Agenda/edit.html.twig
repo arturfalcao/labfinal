@@ -1,0 +1,224 @@
+
+
+{% include 'AppBundle::resources.html.twig' %}
+
+
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+{#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+{% endstylesheets %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+    {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/lang-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/jquery.timepicker.js') }}"></script>
+{% endblock %}
+
+<link rel="stylesheet" type="text/css" href="/bundles/app/css/calendario.css" />
+<link rel="stylesheet" type="text/css" href="/bundles/app/css/jquery.timepicker.css" />
+
+{% block scripts -%}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>#}
+    <script type="text/javascript">
+        angular.module('CalendarModule', [])
+                .controller('CalendarCtrl', function($scope, $locale, $http) {
+                    $scope.show = true;
+                    $scope.changeshow = function(){
+                        $scope.show = $scope.show == true ? false : true;
+
+                    }
+                }).config(function($interpolateProvider){
+                    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+                });
+
+
+    </script>
+{% endblock %}
+
+<div class="container-fluid new_cal_element">
+    <div class="row">
+        <div class="large-1 medium-1 columns no-padding" style="position:fixed;height: 100vh;border: 1px solid #DFDFDF;z-index: 5;">
+            {% include 'default/menu.html.twig' %}
+        </div>
+        <div class=" large-15 medium-15 columns">
+            <div class="row">
+
+
+                <div class="large-16 medium-16 columns no-padding">
+                    {% include 'default/topheader_agenda_edit.html.twig' %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="large-16 medium-16 columns no-padding">
+
+                    {% block body -%}
+                        <div class="row linha_branco">0</div>
+                        <div class="row linha_branco">0</div>
+                        <div class="row linha_branco">0</div>
+                        <div class="row linha_branco">0</div>
+                        {{ form_start(edit_form) }}
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(edit_form.title, 'Nome do Evento') }}
+                            {{ form_widget(edit_form.title) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(edit_form.morada, 'Onde') }}
+                            {{ form_widget(edit_form.morada) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_label(edit_form.descricao, 'Descrição') }}
+                            {{ form_widget(edit_form.descricao) }}
+                        </div>
+
+                        <div class="large-3 medium-3 push-1 form-group">
+                            {{ form_label(edit_form.startdatetime, 'Data de início') }}
+                            {{ form_widget(edit_form.startdatetime) }}
+                        </div>
+
+                        <div class="large-3 medium-3 push-1 form-group">
+                            {{ form_label(edit_form.enddatetime, 'Data de fim') }}
+                            {{ form_widget(edit_form.enddatetime) }}
+                        </div>
+
+                        <div class="large-6 medium-6 push-1 form-group">
+                            {{ form_widget(edit_form.allDay) }}
+                            {{ form_label(edit_form.allDay, 'Todo o dia?') }}
+
+                        </div>
+
+
+                        <div class="row linha_branco">0</div>
+
+                        <hr>
+                        <div class="bottom-buttons buttons-center">
+                            <button type="submit" id="g_sair" class="btn-success">
+                                <i class="fa fa-save" ></i>
+                                <span>Atualizar</span>
+                            </button>
+
+                            <button id="cancelar" class="btn-danger">
+                                <i class="fa fa-times-circle"></i>
+                                <span>Cancelar</span>
+                            </button>
+                        </div>
+
+                            {{ form_end(edit_form) }}
+
+
+
+                    {% endblock %}
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    $( document ).ready(function() {
+        $('#cancelar').on('click', function(e)  {
+            window.location.href = '/app_dev.php/calendar';
+            e.preventDefault();
+        });
+
+        $(".Agenda_startdatetime_date").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        });
+
+        $('#Agenda_startdatetime_time').timepicker({ 'timeFormat': 'H:i', 'step': 10 });
+        $('#Agenda_enddatetime_time').timepicker({ 'timeFormat': 'H:i' , 'step': 10});
+
+        $(".Agenda_enddatetime_date").datepicker({
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior'
+        });
+
+    });
+
+    $('#Agenda_allDay').attr('required',false);
+
+    $('#g_sair').on('click', function(e)  {
+
+        var titulo = $('#Agenda_title').val();
+        var morada = $('#Agenda_morada').val();
+        var descricao = $('#Agenda_descricao').val();
+        var data_inicio = $('#Agenda_startdatetime_date').val().length;
+        var tempo_inicio = $('#Agenda_startdatetime_time').val().length;
+        var data_fim_1 = $('#Agenda_enddatetime_date').val().length;
+        var tempo_fim = $('#Agenda_enddatetime_time').val().length;
+        if( titulo && morada && descricao && data_inicio != 0 && tempo_inicio != 0
+                && data_fim_1 != 0 && tempo_fim != 0) {
+
+            if (data_fim_1 != 0 && tempo_fim != 0) {
+                var data_ini = $("#Agenda_startdatetime_date").val();
+                var data_ini_temp = $('#Agenda_startdatetime_time').val();
+
+                var data_fim = $('#Agenda_enddatetime_date').val();
+                var data_fim_temp = $('#Agenda_enddatetime_time').val();
+
+                if (data_ini < data_fim) {
+                    $("form").submit();
+                }
+                else if (data_ini == data_fim && data_ini_temp < data_fim_temp) {
+                    $("form").submit();
+                }
+                else {
+                    e.preventDefault();
+                }
+            }
+            else {
+                $("form").submit();
+            }
+        }
+        else{
+            e.preventDefault();
+        }
+
+
+    });
+
+
+
+</script>
+
+
+
+
+
+

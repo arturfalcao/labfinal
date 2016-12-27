@@ -1,0 +1,332 @@
+
+
+{% include 'AppBundle::resources.html.twig' %}
+
+
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+{#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+{% endstylesheets %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+    {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+
+
+
+
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/AdminLTE/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/AdminLTE/css/ionicons.min.css">
+
+    <link rel="stylesheet" href="/bundles/sonatacore/vendor/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/jqueryui/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/select2/select2.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/select2/select2-bootstrap.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/vendor/x-editable/dist/bootstrap3-editable/css/bootstrap-editable.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/css/styles.css">
+    <link rel="stylesheet" href="/bundles/sonataadmin/css/layout.css">
+
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/sonata.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/app.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/menu.css">
+    <link rel="stylesheet" type="text/css" href="/bundles/app/js/icheck/skins/minimal/minimal.css">
+
+    <link rel="stylesheet" type="text/css" href="/bundles/app/css/net/bootstrap-datetimepicker.min.css">
+    {#<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">#}
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/perfil.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}" />
+
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/icheck/icheck.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/lang-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sonataadmin/vendor/select2/select2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/sonataadmin/vendor/select2/select2_locale_pt-PT.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap-datetimepicker.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>#}
+
+
+{% endblock %}
+
+
+{% block scripts -%}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>#}
+
+{% endblock %}
+
+<script type="text/javascript" src="{{ asset('/bundles/app/js/toastr.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ asset('/bundles/app/css/toastr.min.css') }}" />
+
+<div class="new_cal_element">
+
+    <div class="row" >
+        <div class="large-1 medium-1 columns no-padding" style="position:fixed;height: 100vh;border: 1px solid #DFDFDF;z-index: 5;padding: 0;">
+            {% include 'default/menu.html.twig' %}
+        </div>
+
+        <div class="large-15 medium-15 columns">
+            <div class="row">
+                <div class="large-15 medium-15 columns no-padding">
+                    {% include 'default/topheader_planeamento.html.twig' %}
+                </div>
+            </div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+
+
+            <style>
+                #filtros{
+                    margin-left: 25px;
+                }
+
+
+            </style>
+
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h4 id="filtros">FILTROS</h4>
+
+                </div>
+
+                <div class="box-body">
+                    <div class="row">
+                        <div class="sonata-ba-filter col-md-16">
+                            <hr id="cab_filtros">
+                            <form class="sonata-filter-form "  style="float: left;margin: 0;width:100%" action="{{ path('tamostras_planeamento') }}" method="GET" role="form">
+
+                                <div class="large-3 medium-3 form-group visivel" style="margin-right: 20px;margin-left: 35px;">
+                                    <label for="filter_fnOperador_value">Cliente</label>
+                                    <select id="cliente" name="cliente" title="Cliente">
+                                        <option value=""></option>
+                                        {% for cliente  in clientes %}
+                                            <option value="{{cliente.fnId}}">{{ cliente.ftNome }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <label for="filter_fnOperador_value">Produto</label>
+                                    <select id="produto" name="produto" title="Produto">
+                                        <option value=""></option>
+                                        {% for produto  in produtos %}
+                                            <option value="{{produto.fnId}}">{{ produto.ftDescricao }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+                                <div class="large-3 medium-3 form-group visivel" style="margin-right: 20px;margin-left: 35px;">
+                                    <label for="filter_fnOperador_value">Grupo Parâmetros</label>
+                                    <select id="grupo" name="grupo" title="Grupo">
+                                        <option value=""></option>
+                                        {% for grupo  in grupos %}
+                                            <option value="{{grupo.fnId}}">{{ grupo.ftDescricao }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+
+
+                                <div class="large-2 medium-2 form-group visivel" style="margin-right: 20px;margin-left: 35px;">
+                                    <label for="datetimepicker1">Data de início</label>
+                                    <div class='input-group date datepickers'  id='datetimepicker1'>
+                                        <input type='text' name="dataini" class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+
+                                    <label for="datetimepicker2" style="margin-top: 16px">Data de Fim</label>
+                                    <div class='input-group date datepickers'  id='datetimepicker2'>
+                                        <input type='text' name="datafim" class="form-control" />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="well well-small form-actions large-16 medium-16 form-group visivel text-center" style="margin-right: 20px;border-top: none;">
+                                    <button type="submit" class="btn btn-success visivel"><i class="fa fa-filter"></i> {{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}</button>
+
+                                    <div class="btn btn-success">
+                                        <a href="/app_dev.php/NovoPlaneamento?filters=reset">Redefinir</a>
+
+                                    </div>
+                                </div>
+
+
+                                <hr id="rod_filtros" >
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row" >
+
+                    {% block body -%}
+
+                        <div class="sonata-ba-list col-md-12">
+                        <div class="box box-primary">
+                            <div class="box-body table-responsive no-padding" style="height: 800px;max-height: 800px;">
+                           <table class="records_list table table-bordered table-striped">
+                            <tbody style="">
+                                    <thead>
+                                    <tr class="sonata-ba-list-field-header">
+                                        <th class="sonata-ba-list-field-header sonata-ba-list-field-header-batch">
+                                        </th>
+                                        <th class="sonata-ba-list-field-header-integer ">ID</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Data de início</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Data de fim</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Cliente</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Local de Recolha</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Grupo de Parâmetros</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Produtos</th>
+                                        <th class="sonata-ba-list-field-header-integer ">Ação</th>
+                                    </tr>
+                                    </thead>
+                            {% for entity in entities %}
+                                <tr>
+                                    <td class="">
+                                        <input type="checkbox" name="idx[{{ entity.fnId }}]" id="{{ entity.fnId }}">
+                                    </td>
+                                    <td>{{ entity.fnId }}</td>
+                                    <td>{% if entity.startdatetime %}{{ entity.startdatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{% if entity.enddatetime %}{{ entity.enddatetime|date('Y-m-d H:i:s') }}{% endif %}</td>
+                                    <td>{{ entity.fnCliente }}</td>
+                                    <td>{{ entity.ftRefexterna }}</td>
+                                    <td>{{ entity.ftGrupoparametros }}</td>
+                                    <td>{{ entity.fnProduto }}</td>
+                                    <td>
+                                        <a href="{{ path('tamostras_edit', { 'id': entity.fnId }) }}" class="btn btn-sm btn-default edit_link" title="{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}">
+                                            <img src="/bundles/app/images/edit.png">
+                                            {#{{ 'action_edit'|trans({}, 'SonataAdminBundle') }}#}
+                                        </a>
+                                        {#<a href="{{ path('tamostras_edit', { 'id': entity.fnId }) }}" class="btn btn-sm btn-default edit_link" title="Editar">
+                                            <i class="glyphicon glyphicon-edit"></i>
+                                            Editar
+                                        </a>#}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                                <hr>
+                                <div class="bottom-buttons buttons-center">
+                                    <a href="#" class="right lancar_amostras hollow-button">Lançar Amostras</a>
+                                </div>
+
+                                <div class="bottom-buttons buttons-center">
+                                    <a href="/app_dev.php/NovoPlaneamento?limit={{ limit }}&offset={{ offset }}" class="right hollow-button" style="margin-right: 5px">Próximos 50</a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                        <script>
+                            $( document ).ready(function() {
+
+
+                                $('input[type="checkbox"]').iCheck({
+                                    checkboxClass: 'icheckbox_minimal',
+                                    radioClass: 'iradio_minimal',
+                                    increaseArea: '20%' // optional
+                                });
+                                $('.lancar_amostras').click(function() {
+                                    var tt = $('input[type="checkbox"]').iCheck('data');
+                                    var send ="";
+                                    $.each(tt, function( index, value ) {
+                                        if(value.checked == true){
+                                            if(send == ""){
+                                                send = value.id;
+                                            }else{
+                                                send = send + "-" + value.id;
+                                            }
+                                        }
+                                    });
+                                    $.ajax({
+                                        type: "POST",
+                                        url: '{{path('tamostras_planeamentolancaamostras')}}',
+                                        data:  send ,
+                                        success: function(data) {
+                                            data = data.slice(-2);
+                                            if(data == "ok"){
+                                                location.reload();
+                                            }else{
+                                                toastr.info("Não foi possivel atualizar/lançar as amostras");
+                                            }
+
+                                        }
+                                    });
+
+                                });
+                                $('select').select2();
+                                $('.datepickers').datetimepicker({
+                                    locale: 'pt',
+                                    format: 'YYYY/MM/DD'
+                                });
+
+                                $('.invisivel').hide();
+                                $('.visivel').hide();
+                                $('#rod_filtros').hide();
+
+                                $("label[for='filter_fdCriacao_value_start']").html('Data de Criação de');
+                                $("label[for='filter_fdCriacao_value_end']").html('até');
+
+                                $("label[for='filter_fdConclusao_value_start']").html('Data de Conclusão de');
+                                $("label[for='filter_fdConclusao_value_end']").html('até');
+
+                                $("label[for='filter_fdAutorizacao_value_start']").html('Data Autorização de');
+                                $("label[for='filter_fdAutorizacao_value_end']").html('até');
+
+
+                                $( "#filtros" ).click(function() {
+
+                                    $( ".visivel" ).each(function( index ) {
+                                        var texto = $( this ).text().trim();
+                                        if(texto.length == 0)
+                                            $( this ).remove();
+                                    });
+
+                                    $( ".visivel" ).toggle();
+                                    $("#cab_filtros").toggle("hide");
+                                    $("#rod_filtros").toggle("show");
+                                });
+
+                            });
+
+
+                        </script>
+                    {% endblock %}
+                </div>
+
+        </div>
+    </div>
+</div>
+
+

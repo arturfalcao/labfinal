@@ -1,0 +1,96 @@
+<style>
+
+.hsd{
+    color:#4cc3b8;
+    font-size: 22px;
+
+}
+
+.hid{
+    font-size: 14px;
+}
+
+.cabecalho{
+    font-weight: bold;
+
+}
+
+.alinhamento{text-align: center}
+
+
+</style>
+<table>
+    <tr>
+        <td rowspan="3" ><img src="/bundles/app/images/logo_il.png" alt="" ></td>
+        <td class="hsd">{{ h_s_d }}</td>
+    </tr>
+    <tr>
+        <td class="hid">{{ h_i_d }}</td>
+    </tr>
+
+</table>
+
+<body>
+<div></div>
+<div></div>
+<table border="1">
+    <tr class="cabecalho alinhamento">
+        <th style="font-size: 12px;">Parâmetro</th>
+        <th style="font-size: 12px;">Produto</th>
+        <th style="font-size: 12px;">Grupo de Parâmetros</th>
+        <th style="font-size: 12px;">Modelo</th>
+        <th style="font-size: 12px;">R. Original</th>
+        <th style="font-size: 12px;">Data modificação</th>
+        <th style="font-size: 12px;">Técnico</th>
+    </tr>
+
+
+        {% for entrada in amostras_log %}
+            <tr class="alinhamento">
+            {% if entrada[0] %}
+            <th style="font-size: 10px;">{{  entrada[0].ftDescricao }}</th>
+            {% else %}
+            <th style="font-size: 10px;"></th>
+            {% endif %}
+            {% if entrada[1] %}
+                <th style="font-size: 10px;">{{  entrada[1].ftDescricao }}</th>
+            {% else %}
+                <th></th>
+            {% endif %}
+            {% if entrada[2] %}
+                <th style="font-size: 10px;">{{  entrada[2].ftDescricao }}</th>
+            {% else %}
+                <th></th>
+            {% endif %}
+            {% if entrada[3] %}
+                <th style="font-size: 10px;">{{  entrada[3].ftDescricao }}</th>
+            {% else %}
+                <th></th>
+            {% endif %}
+            {% if entrada[4] %}
+            <th style="font-size: 10px;">{{  entrada[4].ftOriginal }}</th>
+            {% else %}
+            <th></th>
+            {% endif %}
+            {% if entrada[5] %}
+            <th style="font-size: 10px;">{{  entrada[5] }}</th>
+            {% else %}
+            <th></th>
+            {% endif %}
+            {% if entrada[6] %}
+                <th style="font-size: 10px;">{{  entrada[6] }}</th>
+            {% else %}
+                <th></th>
+            {% endif %}
+
+            </tr>
+        {% endfor %}
+
+
+
+
+</table>
+
+</body>
+
+

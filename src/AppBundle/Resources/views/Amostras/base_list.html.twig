@@ -1,0 +1,609 @@
+{#
+
+This file is part of the Sonata package.
+
+(c) Thomas Rabaix <thomas.rabaix@sonata-project.org>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+
+#}
+
+
+{% extends base_template %}
+
+{% block actions %}
+{% spaceless %}
+    {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
+        <li>{% include 'SonataAdminBundle:Core:create_button.html.twig' %}</li>
+    {% endif %}
+{% endspaceless %}
+{% endblock %}
+
+{% block tab_menu %}{{ knp_menu_render(admin.sidemenu(action), {'currentClass' : 'active', 'template': admin_pool.getTemplate('tab_menu_template')}, 'twig') }}{% endblock %}
+
+
+{% block list_table %}
+    <div class="box box-primary">
+        <div class="box-body table-responsive no-padding">
+            {{ sonata_block_render_event('sonata.admin.list.table.top', { 'admin': admin }) }}
+
+            {% block list_header %}{% endblock %}
+
+            {% set batchactions = admin.batchactions %}
+            {% if admin.datagrid.results|length > 0 %}
+                {% if admin.hasRoute('batch') %}
+                <form class="amostas_list" action="{{ admin.generateUrl('batch', {'filter': admin.filterParameters}) }}" method="POST" >
+                    <input type="hidden" name="_sonata_csrf_token" value="{{ csrf_token }}">
+                {% endif %}
+                    <table class="table table-bordered table-striped">
+                        {% block table_header %}
+                            <thead>
+                                <tr class="sonata-ba-list-field-header">
+                                    {% for field_description in admin.list.elements %}
+                                        {% if admin.hasRoute('batch') and field_description.getOption('code') == '_batch' and batchactions|length > 0 %}
+                                            <th class="sonata-ba-list-field-header sonata-ba-list-field-header-batch">
+                                              <input type="checkbox" id="list_batch_checkbox">
+                                            </th>
+                                        {% elseif field_description.getOption('code') == '_select' %}
+                                            <th class="sonata-ba-list-field-header sonata-ba-list-field-header-select"></th>
+                                        {% elseif field_description.name == '_action' and app.request.isXmlHttpRequest %}
+                                            {# Action buttons disabled in ajax view! #}
+                                        {% elseif field_description.getOption('ajax_hidden') == true and app.request.isXmlHttpRequest %}
+                                            {# Disable fields with 'ajax_hidden' option set to true #}
+                                        {% else %}
+                                            {% set sortable = false %}
+                                            {% if field_description.options.sortable is defined and field_description.options.sortable %}
+                                                {% set sortable             = true %}
+                                                {% set sort_parameters      = admin.modelmanager.sortparameters(field_description, admin.datagrid) %}
+                                                {% set current              = admin.datagrid.values._sort_by == field_description or admin.datagrid.values._sort_by.fieldName == sort_parameters.filter._sort_by %}
+                                                {% set sort_active_class    = current ? 'sonata-ba-list-field-order-active' : '' %}
+                                                {% set sort_by              = current ? admin.datagrid.values._sort_order : field_description.options._sort_order %}
+                                            {% endif %}
+
+                                            {% spaceless %}
+                                                <th class="sonata-ba-list-field-header-{{ field_description.type}} {% if sortable %} sonata-ba-list-field-header-order-{{ sort_by|lower }} {{ sort_active_class }}{% endif %}">
+                                                    {% if sortable %}<a href="{{ admin.generateUrl('list', sort_parameters) }}">{% endif %}
+                                                    {{ admin.trans(field_description.label, {}, field_description.translationDomain) }}
+                                                    {% if sortable %}</a>{% endif %}
+                                                </th>
+                                            {% endspaceless %}
+                                        {% endif %}
+                                    {% endfor %}
+                                </tr>
+                            </thead>
+                        {% endblock %}
+
+                        {% block table_body %}
+                            <tbody>
+                                {% for object in admin.datagrid.results %}
+                                    <tr>
+                                        {% include admin.getTemplate('inner_list_row') %}
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        {% endblock %}
+
+                        {% block table_footer %}
+                            <tfoot>
+                                <tr>
+                                    <th colspan="{{ admin.list.elements|length - (app.request.isXmlHttpRequest ? (admin.list.has('_action') + admin.list.has('batch')) : 0) }}">
+                                        <div class="form-inline">
+                                            {% if not app.request.isXmlHttpRequest %}
+                                                {% if admin.hasRoute('batch') and batchactions|length > 0  %}
+                                                    {% block batch %}
+                                                        <script>
+                                                            {% block batch_javascript %}
+                                                                jQuery(document).ready(function ($) {
+                                                                    $('#list_batch_checkbox').on('ifChanged', function () {
+                                                                        $(this)
+                                                                            .closest('table')
+                                                                            .find('td.sonata-ba-list-field-batch input[type="checkbox"]')
+                                                                            .iCheck($(this).is(':checked') ? 'check' : 'uncheck')
+                                                                        ;
+                                                                    });
+
+                                                                    $('td.sonata-ba-list-field-batch input[type="checkbox"]').on('ifChanged', function () {
+                                                                            $(this)
+                                                                                .closest('tr')
+                                                                                .toggleClass('sonata-ba-list-row-selected', $(this).is(':checked'))
+                                                                            ;
+                                                                        }).trigger('ifChanged');
+                                                                });
+                                                            {% endblock %}
+                                                        </script>
+
+                                                        {% block batch_actions %}
+                                                            <label class="checkbox" for="{{ admin.uniqid }}_all_elements">
+                                                                <input type="checkbox" name="all_elements" id="{{ admin.uniqid }}_all_elements">
+                                                                {{ 'all_elements'|trans({}, 'SonataAdminBundle') }}
+                                                                 ({{ admin.datagrid.pager.nbresults }})
+                                                            </label>
+
+                                                            <select id="action_ok" name="action"  style="width: auto; height: auto" class="form-control">
+                                                                <option value="printworklist">Imprimir Lista de Trabalho</option>
+                                                                <option value="emitirrelatorio">Imprimir Relatório</option>
+                                                                <option value="gerarcodigo">Gerar Código de Barras</option>
+
+                                                            </select>
+                                                        {% endblock %}
+
+                                                        <input type="submit" id="botao_ok" class="btn btn-small btn-primary" value="{{ 'btn_batch'|trans({}, 'SonataAdminBundle') }}">
+                                                    {% endblock %}
+                                                {% endif %}
+
+                                                <div class="pull-right">
+                                                    {% if admin.hasRoute('export') and admin.isGranted("EXPORT") and admin.getExportFormats()|length %}
+                                                        <div class="btn-group">
+                                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                                <i class="glyphicon glyphicon-export"></i>
+                                                                {{ "label_export_download"|trans({}, "SonataAdminBundle") }}
+                                                                <span class="caret"></span>
+                                                            </button>
+                                                            <ul class="dropdown-menu">
+                                                                {% for format in admin.getExportFormats() %}
+                                                                    <li>
+                                                                        <a href="{{ admin.generateUrl('export', admin.modelmanager.paginationparameters(admin.datagrid, 0) + {'format' : format}) }}">
+                                                                            <i class="glyphicon glyphicon-download"></i>
+                                                                            {{ format|upper }}
+                                                                        </a>
+                                                                    <li>
+                                                                {% endfor %}
+                                                            </ul>
+                                                        </div>
+
+                                                        &nbsp;-&nbsp;
+                                                    {% endif %}
+
+                                                    {% block pager_results %}
+                                                        {% include admin.getTemplate('pager_results') %}
+                                                    {% endblock %}
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </th>
+                                </tr>
+
+                                {% block pager_links %}
+                                    {% if admin.datagrid.pager.haveToPaginate() %}
+                                        {% include admin.getTemplate('pager_links') %}
+                                    {% endif %}
+                                {% endblock %}
+
+                            </tfoot>
+                        {% endblock %}
+                    </table>
+                {% if admin.hasRoute('batch') %}
+                </form>
+                {% endif %}
+            {% else %}
+                <div class="callout callout-info">
+                    {{ 'no_result'|trans({}, 'SonataAdminBundle') }}
+                </div>
+            {% endif %}
+
+            {% block list_footer %}{% endblock %}
+
+            {{ sonata_block_render_event('sonata.admin.list.table.bottom', { 'admin': admin }) }}
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block list_filters %}
+
+
+    {% if admin.datagrid.filters %}
+        {% form_theme form admin.getTemplate('filter') %}
+        <div class="box box-primary">
+            <div class="box-header">
+                <h4 id="filtros">FILTROS</h4>
+                <hr id="cab_filtros">
+            </div>
+
+            <div class="box-body">
+                <form class="sonata-filter-form {{ admin.isChild and 1 == admin.datagrid.filters|length ? 'hide' : '' }}" action="{{ admin.generateUrl('list') }}" method="GET" role="form">
+                    {{ form_errors(form) }}
+                        <div class="filter_container {{ admin.datagrid.hasActiveFilters ? 'active' : 'inactive' }}">
+
+                            <div class="large-16 medium-16 columns no-padding">
+
+                                <div class="large-2 medium-2 form-group visivel" style="margin-right: 20px;margin-left: 35px;">
+                                {% for filter in admin.datagrid.filters %}
+
+
+                                      {% if filter.formName == 'fnId' or filter.formName == 'ftSerie'
+                                      or filter.formName == 'ftResponsavelcolheita' or filter.formName == 'fnOperador'
+                                      or filter.formName == 'fnNumero' %}
+
+                                        {% if filter.label is not same as(false) %}
+                                            <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+
+                                        {% endif %}
+
+                                        {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                        {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                        <div>
+                                            {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                        </div>
+
+                                        <div>
+                                            {{ form_widget(form.children[filter.formName].children['value']) }}
+                                        </div>
+                                    {% endif %}
+
+
+                                {% endfor %}
+                                </div>
+
+                                <div class="large-2 medium-2 form-group visivel" style="margin-right: 20px;">
+                                    <script>
+                                        jQuery(document).ready(function(){
+							$(".sonata-filter-form input").add(".sonata-filter-form select").each(function(){
+							        if($(this).val()) {
+						            $(this).addClass('had-value-on-load');
+							        }
+    							});
+						    $(".sonata-filter-form").submit(function() {
+							        $(".sonata-filter-form input").add(".sonata-filter-form select").each(function(){
+							        if(!$(this).val() && !$(this).hasClass('had-value-on-load')) {
+						                $(this).remove()
+						            };
+						        });
+						    });
+                                            
+						//jQuery('input[data-date-format]').attr('data-date-format' , 'DD/MM/YYYY HH:mm:ss' )					
+						
+					});
+                                    </script>
+					{% for filter in admin.datagrid.filters %}
+
+                                            {% if filter.formName == 'fdColheita' or filter.formName == 'fdCriacao'
+                                            or filter.formName == 'fdLimite' or filter.formName == 'fdRecepcao' %}
+
+                                                {% if filter.label is not same as(false) %}
+                                                    <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+
+                                                {% endif %}
+
+                                                {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                                {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                                <div>
+                                                    {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                                </div>
+
+                                                <div>
+                                                    {{ form_widget(form.children[filter.formName].children['value']) }}
+                                                </div>
+                                            {% endif %}
+
+
+
+                                    {% endfor %}
+                                </div>
+
+
+                                <div class="large-3 medium-3 form-group visivel" style="margin-right: 20px;">
+                                    {% for filter in admin.datagrid.filters %}
+
+                                        {% if filter.formName == 'fnLocalcolheita' or filter.formName == 'ftEstado'
+                                        or filter.formName == 'fnTipoaprovacao' or filter.formName== 'fnTipocontrolo'
+                                        or filter.formName == 'ftCumpreespecificacao' %}
+
+                                            {% if filter.label is not same as(false) %}
+                                                <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+
+                                            {% endif %}
+
+                                            {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                            {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                            </div>
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['value']) }}
+                                            </div>
+                                        {% endif %}
+
+
+
+                                    {% endfor %}
+                                </div>
+
+
+                                <div class="large-3 medium-3 form-group visivel" style="margin-right: 20px;">
+                                    {% for filter in admin.datagrid.filters %}
+
+                                        {% if filter.formName == 'fnCliente' or filter.formName == 'fnProduto'
+                                        or filter.formName == 'fnModelo' or filter.formName== 'fnEspecificacao'
+                                        or filter.formName == 'fdAutorizacao' %}
+
+                                            {% if filter.label is not same as(false) %}
+                                                <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+
+                                            {% endif %}
+
+                                            {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                            {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                            </div>
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['value']) }}
+                                            </div>
+                                        {% endif %}
+
+
+
+                                    {% endfor %}
+                                </div>
+
+                                <div class="large-3 medium-3 form-group visivel" style="margin-right: 20px;">
+                                    {% for filter in admin.datagrid.filters %}
+
+                                        {% if filter.formName == 'fnIdOrcamento' or filter.formName == 'fdInicioanalise'
+                                        or filter.formName == 'fbFacturada' or filter.formName== 'fnRequisicaocliente'
+                                        or filter.formName == 'fdConclusao' %}
+
+                                            {% if filter.label is not same as(false) %}
+                                                <label for="{{ form.children[filter.formName].children['value'].vars.id }}">{{ admin.trans(filter.label, {}, filter.translationDomain) }}</label>
+
+                                            {% endif %}
+
+                                            {% set attr = form.children[filter.formName].children['type'].vars.attr|default({}) %}
+                                            {% set attr = attr|merge({'class': (attr.class|default('') ~ ' sonata-filter-option')|trim}) %}
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['type'], {'attr':  attr}) }}
+                                            </div>
+
+                                            <div>
+                                                {{ form_widget(form.children[filter.formName].children['value']) }}
+                                            </div>
+                                        {% endif %}
+
+
+
+                                    {% endfor %}
+                                </div>
+
+
+
+                                <input type="hidden" name="filter[_page]" id="filter__page" value="1">
+
+                                {% set foo = form.children['_page'].setRendered() %}
+                                {{ form_rest(form) }}
+                                <div class="well well-small form-actions large-16 medium-16 form-group visivel text-center" style="margin-right: 20px;border-top: none;">
+                                    <button type="submit" class="btn btn-success visivel"><i class="fa fa-filter"></i> {{ 'btn_filter'|trans({}, 'SonataAdminBundle') }}</button>
+
+                                    <div class="btn btn-success">
+                                        <a href="{{ admin.generateUrl('list', {filters: 'reset'}) }}">{{ 'link_reset_filter'|trans({}, 'SonataAdminBundle') }}</a>
+
+                                    </div>
+                                </div>
+                                <hr id="rod_filtros" >
+                            </div>
+                        </div>
+                        {% for paramKey, paramValue in admin.persistentParameters %}
+                            <input type="hidden" name="{{ paramKey }}" value="{{ paramValue }}">
+                        {% endfor %}
+
+
+                </form>
+            </div>
+        </div>
+
+    {% endif %}
+    <script>
+        $( document ).ready(function() {
+            $('.invisivel').hide();
+            $('.visivel').hide();
+            $('#rod_filtros').hide();
+            $("label[for='filter_fdColheita_value_start']").html('Data Colheita de');
+            $("label[for='filter_fdColheita_value_end']").html('até');
+
+            /*$('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .datepicker-days .table-condensed thead tr:nth-child(2) th').each(function( index ) {
+                //alert( index + ": " + $( this ).text() );
+                if($( this ).text() == 'Su')
+                {$( this ).html('Do');}
+                else if($( this ).text() == 'Mo')
+                {$( this ).html('Se');}
+                else if($( this ).text() == 'Tu')
+                {$( this ).html('Te');}
+                else if($( this ).text() == 'We')
+                {$( this ).html('Qu');}
+                else if($( this ).text() == 'Th')
+                {$( this ).html('Qu');}
+                else if($( this ).text() == 'Fr')
+                {$( this ).html('Se');}
+                else if($( this ).text() == 'Sa')
+                {$( this ).html('Sa');}
+
+            });
+
+            $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .datepicker-months .table-condensed tbody tr td span').each(function( index ) {
+                if($( this ).text() == 'Jan')
+                {$( this ).html('Jan');}
+                else if($( this ).text() == 'Feb')
+                {$( this ).html('Fev');}
+                else if($( this ).text() == 'Mar')
+                {$( this ).html('Mar');}
+                else if($( this ).text() == 'Apr')
+                {$( this ).html('Abr');}
+                else if($( this ).text() == 'May')
+                {$( this ).html('Mai');}
+                else if($( this ).text() == 'Jun')
+                {$( this ).html('Jun');}
+                else if($( this ).text() == 'Jul')
+                {$( this ).html('Jul');}
+                else if($( this ).text() == 'Aug')
+                {$( this ).html('Ago');}
+                else if($( this ).text() == 'Sep')
+                {$( this ).html('Set');}
+                else if($( this ).text() == 'Oct')
+                {$( this ).html('Out');}
+                else if($( this ).text() == 'Nov')
+                {$( this ).html('Nov');}
+                else if($( this ).text() == 'Dec')
+                {$( this ).html('Dez');}
+            });
+
+            $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .picker-switch').change(function(){
+                alert($(this).text());
+            });*/
+            /*$( "#dtp_filter_fdCriacao_value .input-group-addon" ).click(function() {
+                var y = $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .picker-switch');
+                var x = $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .picker-switch').text();
+
+                var n = x.indexOf(" ");
+                var mes = x.substr(0, n);
+                var ano = new Date().getFullYear();
+
+                if(mes == 'January')
+                {
+                    y.html('Janeiro '+ ano);
+                }
+                else if(mes == 'February')
+                {
+                    y.html('Fevereiro '+ ano);
+                }
+                else if(mes == 'March')
+                {
+                    y.html('Março '+ ano);
+                }
+                else if(mes == 'April')
+                {
+                    y.html('Abril '+ ano);
+                }
+                else if(mes == 'May')
+                {
+                    y.html('Maio '+ ano);
+                }
+                else if(mes == 'June')
+                {
+                    y.html('Junho '+ ano);
+                }
+                else if(mes == 'July')
+                {
+                    y.html('Julho '+ ano);
+                }
+                else if(mes == 'August')
+                {
+                    y.html('Agosto '+ ano);
+                }
+                else if(mes == 'September')
+                {
+                    y.html('Setembro '+ ano);
+                }
+                else if(mes == 'October')
+                {
+                    y.html('Outubro '+ ano);
+                }
+                else if(mes == 'November')
+                {
+                    y.html('Novembro '+ ano);
+                }
+                else if(mes == 'December')
+                {
+                    y.html('Dezembro '+ ano);
+                }
+
+
+            });
+
+            $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .prev').click(function() {
+                var y = $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .picker-switch');
+                //var x = $('.bootstrap-datetimepicker-widget .list-unstyled .collapse.in .datepicker .table-condensed thead tr .picker-switch').text();
+                y.html('Maio '+ 2015);
+            });*/
+            /*$(".datepicker").datepicker({
+                dateFormat: 'dd/mm/yy',
+                dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+                dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+                dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+                monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+                nextText: 'Próximo',
+                prevText: 'Anterior'
+            });*/
+
+            $( "#filtros" ).click(function() {
+                $( ".visivel" ).toggle();
+                $("#cab_filtros").toggle("hide");
+                $("#rod_filtros").toggle("show");
+            });
+
+            $( "#botao_ok" ).click(function(e) {
+                var accao = $("#action_ok").val();
+                var ids;
+                if(accao == 'emitirrelatorio')
+                {
+                    ids = "";
+                    $('input[name="idx[]"]:checked').each(function() {
+                        ids+=$(this).val()+',';
+                    });
+                    if(ids.length != 0)
+                    {
+                        ids = ids.slice(0,ids.length-1);
+                        e.preventDefault();
+                        window.open('/app_dev.php/emitirrelatorio/' + ids, '_blank');
+                    }
+                    else{
+                        e.preventDefault();
+                    }
+
+                }
+                else if(accao == 'printworklist')
+                {
+                    ids = "";
+                    $('input[name="idx[]"]:checked').each(function() {
+                        ids+=$(this).val()+',';
+                    });
+                    if(ids.length != 0)
+                    {
+                        ids = ids.slice(0,ids.length-1);
+                        e.preventDefault();
+                        window.open('/app_dev.php/generateworklist/' + ids, '_blank');
+                    }
+                    else{
+                        e.preventDefault();
+                    }
+                }
+                else if(accao == 'gerarcodigo')
+                {
+                    ids = "";
+                    $('input[name="idx[]"]:checked').each(function() {
+                        ids+=$(this).val()+',';
+                    });
+                    if(ids.length != 0)
+                    {
+                        ids = ids.slice(0,ids.length-1);
+                        e.preventDefault();
+                        window.open('/app_dev.php/generatebarcode/' + ids, '_blank');
+                    }
+                    else{
+                        e.preventDefault();
+                    }
+                }
+
+            });
+        })
+    </script>
+    {% if 'Amostra' == admin.label %}
+        <script>
+
+            $( document ).ready(function() {
+                $("label.checkbox").remove();
+            })
+        </script>
+    {% endif %}
+{% endblock %}
