@@ -1,0 +1,403 @@
+<script>
+//Função responsável por verificar se existe mensagens de outros utilizadores
+//para o utilizador autenticado
+function TextoMensagensNaoLidas()
+{
+var user = Number($('#logged').val());
+var nid = Number($('#clicked_user').val());
+var texto = "Tem ";
+$.ajax({
+        type: "POST",
+        url: '{{path('chat_mens_nao_lidas')}}',
+        data: {id: user, emi: nid},
+        success: function(data) {
+          var n = data.search("_");
+          var n_lidas = Number(data.slice(1,n));
+          var n_colaboradores = Number(data.slice(n+1,data.length-1));
+
+          if(n_lidas != 0)
+          {
+          	if(n_lidas == 1)
+          	{
+          		texto = texto + n_lidas + " mensagem de outro colaborador";
+          	}
+          	else
+          	{
+          		if(n_colaboradores > 1)
+          		{
+          		 texto = texto + n_lidas + " mensagens de outros colaboradores";
+          		}
+          		else
+          		{
+          		 texto = texto + n_lidas + " mensagens de outro colaborador";
+          		}
+          	}
+            $(".sms_n_lidas").text(texto);
+          }
+          else
+          {
+            $(".sms_n_lidas").text('');
+          }
+        }
+    });
+setTimeout(TextoMensagensNaoLidas, 5000);
+}
+
+//Função responsável por verificar se existe mensagens não lidas para o utilizador autenticado
+function MensagensNaoLidas()
+{
+var user = Number($('#logged').val());
+var n_lidas_tag = $("#n_lidas");
+var menu_dreita_circulo_tag = $("#menu_direita_circulo");
+    $.ajax({
+      type: "POST",
+      url: '{{path('chat_mens_nao_lidas')}}',
+      data: {id: user, emi: 0},
+      success: function(data) {
+        var n = data.search("_");
+        var n_lidas = Number(data.slice(1,n));
+        n_lidas_tag.html('');
+        menu_dreita_circulo_tag.removeClass('circulo_menu_direita');
+
+        if(n_lidas != 0)
+        {
+          n_lidas_tag.append('<div class="circulo">' + n_lidas + '</div>');
+          menu_dreita_circulo_tag.addClass('circulo_menu_direita');
+        }
+
+      }
+  });
+setTimeout(MensagensNaoLidas, 2000);
+}
+
+//Função responsável por verificar se não existem novas mensagens entre o utilizador selecionado
+// e o utilizador autenticado por parte do utilizador selecionado
+function novasMensagensUtilizador()
+{
+var user = Number($('#logged').val());
+var nid = Number($('#clicked_user').val());
+var imagem;
+var chat = $("#chat");
+    $.ajax({
+            type: "POST",
+            url: '{{path('chat_gethistoriconovo')}}',
+            data: {id: nid, id2: user},
+            success: function(data) {
+            	var arr = $.parseJSON(data);
+
+            	if(arr.length != 0)
+                {
+                    $.each(arr, function(index,value) {
+
+                      var firstname = value.firstname;
+                      imagem = value.imagem;
+
+                      if(imagem)
+                      {
+                        imagem = imagem.replace('"','');
+                        imagem = imagem.replace('"','');
+                        imagem = imagem.replace(/\\/g,'');
+                      }
+                      else {
+                        imagem = '';
+                      }
+
+                      if(!firstname)
+                      {
+                        firstname = '';
+                      }
+
+                  		if(value.id_emissor != user)
+                  		{
+						            chat.append("<div>");
+
+
+                  			if($("#hc_" + value.ident).length == 0) {
+                  				var imagem = '<img class="circle_image imagem_esquerda" id="us_' + value.id_emissor + '" src="' + imagem + '" alt="' + firstname + '" >';
+                  				chat.append(imagem);
+  								chat.append("<p class='triangle-isosceles esq quebra' id='hc_" + value.ident + "'>" + value.mensagem + "</p>" );
+							       }
+
+	                    	chat.append("</div>");
+
+						        }
+
+                  });
+
+              }
+
+              $.ajax({
+                type: "POST",
+                url: '{{path('chat_updatehistorico')}}',
+                data: {id: nid, id2: user},
+                success: function(data) {}
+
+                });
+
+          }
+	});
+
+setTimeout(novasMensagensUtilizador, 4000);
+}
+
+//função responsável por imprimir o histórico de mensagens entre o utilizador selecionado e o utilizador logado
+
+function histMens(element)
+{
+	  	var user = Number($('#logged').val());
+        var imagem = '';
+        var tabs_2 = $("#tabs-2");
+        var chat = $("#chat");
+        var username = "";
+	    var nome_user = $(element).attr('alt');
+	    var id_user = $(element).attr('id');
+	    var nid = Number(id_user.slice(3));
+	    var t="";
+	    $("#clicked_user").remove();
+        $("#texto_imp").remove();
+	    $(".botao_enviar").remove();
+	    $(".sms_n_lidas").remove();
+	    $("#insere").remove();
+	    chat.remove();
+
+        $.ajax({
+                type: "POST",
+                url: '{{path('chat_gethistorico')}}',
+                data: {id: nid, id2: user},
+                success: function(data) {
+                	var arr = $.parseJSON(data);
+                    if(tabs_2.find("#chat").length == 0)
+                        tabs_2.append("<div id='chat' style='max-height:330px;overflow-y:scroll;overflow-x:hidden;border-top:1px solid #DFDFDF;padding-top:23px;'>");
+                	if(arr.length != 0)
+                    {
+                        chat = $("#chat");
+                        if(chat.find("h6").length == 0) {
+                            chat.append("<h6 class='h6' align='center'>" + nome_user + "</h6>");
+                            $.each(arr, function (index, value) {
+                                var firstname = value.firstname;
+                                imagem = value.imagem;
+
+                                if (imagem) {
+                                    imagem = imagem.replace('"', '');
+                                    imagem = imagem.replace('"', '');
+                                    imagem = imagem.replace(/\\/g, '');
+                                }
+                                else {
+                                    imagem = '';
+                                }
+
+                                if (!firstname) {
+                                    firstname = '';
+                                }
+
+                                if (value.id_emissor == user) {
+                                    username = firstname;
+                                    t = imagem;
+                                    chat.append("<div>");
+                                    if ($("#hc_" + value.ident).length == 0) {
+                                        imagem = '<img class="circle_image imagem_direita" id="us_' + value.id_emissor + '" src="' + imagem + '" alt="' + firstname + '" >';
+                                        chat.append(imagem);
+                                        chat.append("<p  class='triangle-isosceles dir quebra' id='hc_" + value.ident + "'>" + value.mensagem + "</p>");
+
+                                    }
+                                    chat.append("</div>");
+                                }
+                                else {
+                                    chat.append("<div>");
+                                    if ($("#hc_" + value.ident).length == 0) {
+                                        imagem = '<img class="circle_image imagem_esquerda" id="us_' + value.id_emissor + '" src="' + imagem + '" alt="' + firstname + '" >';
+                                        chat.append(imagem);
+                                        chat.append("<p class='triangle-isosceles esq quebra' id='hc_" + value.ident + "'>" + value.mensagem + "</p>");
+                                        chat.append("</div>");
+                                    }
+                                }
+                            });
+
+                            tabs_2.append("</div>");
+                            tabs_2.append('<input type="hidden" id="clicked_user" value="' + nid + '">');
+                            novasMensagensUtilizador();
+                            TextoMensagensNaoLidas();
+
+                            tabs_2.append("<p class='sms_n_lidas'></p>");
+                            tabs_2.append("<div id='insere'>" +
+                                    "<input id='texto_imp' placeholder='A sua resposta' type='text' x='i_" + user + "_" + nid + "' >" +
+                                    "<img src='/bundles/app/images/chat-enviar.png'  class='botao_enviar' z='" + t + "' x='" + username + "' onclick='sendMessage(this);' id='b_" + user + "_" + nid + "'>" +
+                                    "</div>");
+                        }
+                    }
+                    else{
+
+                        $.ajax({
+                            type: "POST",
+                            url: '{{path('chat_getdusers')}}',
+                            data: {id: user},
+                            success: function(data) {
+                                var arr = $.parseJSON(data);
+                                imagem='';
+                                if(arr.length != 0)
+                                {
+                                    $.each(arr, function(index,value) {
+                                        imagem = value.imagem;
+                                        if(imagem)
+                                        {
+                                            imagem = imagem.replace('"','');
+                                            imagem = imagem.replace('"','');
+                                            imagem = imagem.replace(/\\/g,'');
+                                        }
+                                        else{
+                                            imagem = '';
+                                        }
+                                        t=imagem;
+                                        if(!value.firstname)
+                                            username ="";
+                                        else
+                                            username = value.firstname;
+
+
+                                    });
+
+                                }
+                                tabs_2.append('<input type="hidden" id="clicked_user" value="' + nid + '">');
+                                novasMensagensUtilizador();
+                                TextoMensagensNaoLidas();
+
+                                tabs_2.append("<p class='sms_n_lidas'></p>");
+                                tabs_2.append("<div id='insere'>" +
+                                        "<input id='texto_imp' placeholder='A sua resposta' type='text' x='i_" + user + "_" + nid +"' >" +
+                                        "<img src='/bundles/app/images/chat-enviar.png'  class='botao_enviar' z='" + t +  "' x='" + username +"' onclick='sendMessage(this);' id='b_" + user + "_" + nid +"'>"  +
+                                        "</div>");
+
+
+                            }
+                        });
+
+                    }
+
+                }
+		});
+
+}
+
+
+//Função responsável por enviar mensagem do utilizador logado e o utilizador selecionado
+function sendMessage(element)
+{
+var texto_imp = $("#texto_imp");
+ var nome_user=$(element).attr('x');
+ var id_user = texto_imp.attr('x');
+ var id_em_re = id_user.slice(2);
+ var mensagem = texto_imp.val();
+ var imagem=$(element).attr('z');
+ var n = id_em_re.search("_");
+ var chat =  $("#chat");
+ var id_emissor = Number(id_em_re.slice(0,n));
+ var id_receptor = Number(id_em_re.slice(n+1));
+ texto_imp.val('');
+
+if(mensagem.length != 0)
+{
+	chat.append("<div >");
+	var imagem2 = '<img class="circle_image imagem_direita" id="us_' + id_emissor + '" src="' + imagem +'" alt="' + nome_user + '" >';
+
+    chat.append(imagem2);
+    chat.append("<p  class='triangle-isosceles dir quebra'>" + mensagem + "</p>" );
+
+    chat.append("</div>");
+
+	$.ajax({
+	    type: "POST",
+	    url: '{{path('chat_inserthistorico')}}',
+	    data: {emi: id_emissor, rece: id_receptor, mens: mensagem},
+	    success: function(data) { }
+    });
+}
+
+}
+
+//função responsável por mostrar o username do utilizador quando se passa com o rato em cima dele no menu de chat
+function nomeUtilizador(element)
+{
+	var nome_user = $(element).attr('alt');
+	var id_foto = $(element).attr('id');
+	var id_user = id_foto.slice(3);
+    if(nome_user.length != 0)
+  	{
+      $("." + id_foto ).prepend("<p id='p_" + id_user + "' class='legenda_user'>"
+      + nome_user + "</p>");
+    }
+}
+
+//função que faz o inverso da função nomeUtilizador
+function removeParagrafo(element)
+{
+	var id_foto = $(element).attr('id');
+	$("." + id_foto + " p").remove();
+}
+
+$( document ).ready(function() {
+
+		var user = Number($('#logged').val());
+        MensagensNaoLidas();
+		$('.li_chat, .li_chat a').click(function(){
+                    var tabs_2 =  $('#tabs-2');
+                    tabs_2.append("<div class='loading' style='margin-top:20px!important;'></div>");
+                    $(".loading").show();
+                    $("#clicked_user").remove();
+                    $("#texto_imp").remove();
+                    $(".botao_enviar").remove();
+                    $(".sms_n_lidas").remove();
+                    $("#insere").remove();
+                    $("#chat").remove();
+				    $(".img_block").remove();
+				  // Responsável por ir buscar os utilizadores diferentes do utilizador logado
+				  $.ajax({
+		                    type: "POST",
+		                    url: '{{path('chat_getusers')}}',
+		                    data: {id: user},
+		                    success: function(data) {
+		                    	var arr = $.parseJSON(data);
+
+
+                                tabs_2.html('');
+		                        if(arr.length != 0)
+		                        {
+                                    tabs_2.append("<div class='img_block' style='width:100%;'>");
+		                          $.each(arr, function(index,value) {
+                                  var imagem = value.imagem;
+                                  if(imagem)
+                                  {
+                                    imagem = imagem.replace('"','');
+                                    imagem = imagem.replace('"','');
+                                    imagem = imagem.replace(/\\/g,'');
+                                  }
+                                  else{
+                                    imagem = '';
+                                  }
+                                  var p_n;
+
+                                      if(!value.firstname)
+                                        p_n ="";
+                                      else
+                                        p_n = value.firstname;
+
+                                  var img_block =  $(".img_block");
+
+                                  img_block.append("<div class='us_" + value.id + "'>");
+                                      imagem = '<img class="img_align circle_image" id="us_'
+                                  + value.id + '" ' + 'src="' + imagem + '" alt="'
+                                  + p_n + '" onclick="histMens(this)" onmouseover="nomeUtilizador(this)" onmouseout="removeParagrafo(this)" />';
+		                              $('.us_' + value.id).append(imagem);
+		                              img_block.append("</div>");
+
+		                          });
+
+                                    tabs_2.append("</div>");
+
+		                        }
+		                        $('.loading').hide();
+		                    }
+		            });
+
+	});
+});
+</script>

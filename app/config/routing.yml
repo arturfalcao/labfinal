@@ -1,0 +1,319 @@
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation
+index:
+    pattern:   /
+    defaults:  { _controller: AppBundle:Default:index }
+new:
+    pattern:   /newaction
+    defaults:  { _controller: AppBundle:TParametros:index }
+calendar:
+    pattern:   /calendar
+    defaults:  { _controller: AppBundle:Default:AfterLogin }
+calendar_show:
+    path:     /calendar/{slug}
+    defaults: { _controller: AppBundle:Agenda:show }
+    methods:  [GET]
+calendar_update:
+    path:     /calendar/{slug}
+    defaults: { _controller: AppBundle:Agenda:update }
+    methods:  [PUT]
+calendar_update_ajax:
+    path:     /agenda/calendar/newshort/{slug}
+    defaults: { _controller: AppBundle:Agenda:updatenewshort }
+    methods:  [PUT]
+calendar_delete:
+    path:     /calendar/{slug}
+    defaults: { _controller: AppBundle:Agenda:delete }
+    methods:  [DELETE]
+tamostras_planeamento:
+    path:     /NovoPlaneamento
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:index }
+    methods:  [GET]
+importacaoamostra:
+    path:     /importacao
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:importacao }
+
+tamostras_planeamentogetamostras:
+    path:     /Getamostras
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:getAmostras }
+    methods:  [GET]
+tamostras_planeamentolancaamostras:
+    path:     /Lancaamostras
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:LancaAmostras }
+    methods:  [POST]
+tamostras_new:
+    path:     /NovoPlaneamento/new
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:new }
+    methods:  [GET]
+generateworklist:
+    path:     /generateworklist/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Generateworklist }
+
+emitirrel:
+    path:     /emitirrelatorio/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:EmitirRelatorio }
+
+generatebarcode:
+    path:     /generatebarcode/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:GeraCodigoBarras }
+
+generateworklistalt:
+    path:     /generateworklistalt/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Generateworklistalt }
+
+completesample:
+    path:     /completesample/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Completesample }
+completepara:
+    path:     /completepara
+    defaults: { _controller: AppBundle:WorkListCTRL:Completepara }
+
+updateworklist:
+    path: /updateworklist
+    defaults: { _controller: AppBundle:WorkListCTRL:AtualizaListaTrabalho }
+
+reopenpara:
+    path:     /reopenpara
+    defaults: { _controller: AppBundle:WorkListCTRL:Reopenpara }
+
+cancelpara:
+    path:     /cancelpara
+    defaults: { _controller: AppBundle:WorkListCTRL:Cancelpara }
+addpara:
+    path:     /addpara
+    defaults: { _controller: AppBundle:WorkListCTRL:addpara }
+
+reopensample:
+    path:     /reopensample/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Reopensample }
+
+cancelsample:
+    path:     /cancelsample/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Cancelsample }
+
+notifysample:
+    path:     /notifysample/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:Notifysample }
+
+EntradaResultados:
+    path:     /EntradaResultados
+    defaults: { _controller: AppBundle:EntResultados:EntradaResultados }
+
+EntradaResultadosGetByParameter:
+  pattern:  /EntradaResultados/para
+  defaults: { _controller: AppBundle:EntResultados:getByParameter }
+
+EntradaResultadosGetByAmostra:
+    pattern:  /EntradaResultados/amostra
+    defaults: { _controller: AppBundle:EntResultados:getByAmostra }
+
+EntradaResultadosgetByRegrasFormatacao:
+    pattern:  /EntradaResultados/regras
+    defaults: { _controller: AppBundle:EntResultados:getByRegrasFormatacao }
+
+EntradaResultadossetByRegrasFormatacao:
+    pattern:  /EntradaResultados/saveregras
+    defaults: { _controller: AppBundle:EntResultados:setByRegrasFormatacao }
+
+EntradaResultadossetByRegrasFormatacaoAmostra:
+    pattern:  /EntradaResultados/saveregrasamostra
+    defaults: { _controller: AppBundle:EntResultados:setByRegrasFormatacaoAmostra }
+
+SaveParaporAmostra:
+    pattern:  /amostras/saveparaporamostra
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:SaveParaporAmostra }
+
+AmostrasGetCicloVida:
+    pattern:  /amostras/ciclo
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:AmostrasGetCicloVida }
+
+AmostrasGetCicloVidaPorPara:
+    pattern:  /amostras/ciclopara
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:AmostrasGetCicloVidaPorParametro }
+
+AmostrasGetUnidadePorPara:
+    pattern:  /amostras/unidadepara
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:AmostrasGetUnidadePorParametro }
+
+AmostrasGetParametro:
+    pattern:  /amostras/getamostraparametro
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:AmostrasGetParametroData }
+
+AmostrasGetParametros:
+    pattern:  /amostras/parametros
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:AmostrasGetParametros }
+
+GetAllPara:
+    pattern:  /GetAllPara
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllPara}
+
+GetAllUnidadesMedida:
+    pattern:  /GetAllUnidadesMedida
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllUnidadesMedida}
+
+GetAllFamilias:
+    pattern:  /GetAllFamilias
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllFamilias}
+
+GetRel:
+    pattern:  /getrelatorio/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:GetRelatorio}
+
+GetAllLaboratorios:
+    pattern:  /GetAllLaboratorios
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllLaboratorios}
+
+GetAllArea:
+    pattern:  /GetAllArea
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllArea}
+
+GetAllMetodo:
+    pattern:  /GetAllMetodo
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllMetodo}
+
+GetGrupoByModelo:
+    pattern:  /GetGrupoByModelo
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetGrupoByModelo}
+
+GetAllTecnica:
+    pattern:  /GetAllTecnica
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetAllTecnica}
+
+GetTecnicaByMetodo:
+    pattern:  /GetTecnicaByMetodo
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetTecnicaByMetodo}
+
+GetLegislacaoByProduto:
+    pattern:  /GetLegislacaoByProduto
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetLegislacaoByProduto}
+
+GetEspecificacaoByProduto:
+    pattern:  /GetEspecificacaoByProduto
+    defaults: { _controller: AppBundle:TAmostrasAdminCustom:GetEspecificacaoByProduto}
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+sonata_user_security:
+    resource: "@ApplicationSonataUserBundle/Resources/config/routing/sonata_security_2.xml"
+
+sonata_user_resetting:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_resetting_1.xml"
+    prefix: /resetting
+
+sonata_user_profile:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_profile_1.xml"
+    prefix: /profile
+
+sonata_user_register:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_registration_1.xml"
+    prefix: /register
+
+sonata_user_change_password:
+    resource: "@SonataUserBundle/Resources/config/routing/sonata_change_password_1.xml"
+    prefix: /profile
+
+sonata_user:
+    resource: '@SonataUserBundle/Resources/config/routing/admin_security.xml'
+    prefix: /admin
+
+admin:
+    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+    prefix: /admin
+
+adesigns_calendar:
+  resource: "@ADesignsCalendarBundle/Resources/config/routing.xml"
+
+EmitRelatorio:
+    path:     /relatorio/emit/{slug}
+    defaults: { _controller: AppBundle:WorkListCTRL:EmitRelatorio }
+
+EmiteListaporParametro:
+    path:     /listaporparametro
+    defaults: { _controller: AppBundle:WorkListCTRL:EmiteListaporParametro }
+
+Getparameterbysample:
+  pattern:  /Getparameterbysample
+  defaults: { _controller: AppBundle:WorkListCTRL:Getparameterbysample }
+
+GetparameterbysampleForParameter:
+  pattern:  /parametroslista
+  defaults: { _controller: AppBundle:WorkListCTRL:GetparameterbysampleForParameter}
+
+GenerateworklistbyParameter:
+  pattern:  /getlistaporparametro
+  defaults: { _controller: AppBundle:WorkListCTRL:GenerateworklistbyParameter}
+
+GetPDFFile:
+  pattern:  /getpdflista/{slug}
+  defaults: { _controller: AppBundle:WorkListCTRL:GetPDFFile}
+
+perfil:
+    path:     /perfil
+    defaults: { _controller: AppBundle:Profile:profilehandler }
+#Jose
+calendar_geteventos:
+    path:     /calendar/geteventos
+    defaults: { _controller: AppBundle:Agenda:geteventos }
+
+calendar_updateeventos:
+    path:     /calendar/updateeventos
+    defaults: { _controller: AppBundle:Agenda:updateeventos }
+
+chat_getusers:
+    path:     /chat/getusers
+    defaults: { _controller: AppBundle:Chat:getusers }
+
+chat_getdusers:
+    path:     /chat/getdusers
+    defaults: { _controller: AppBundle:Chat:getdusers }
+
+chat_gethistoriconovo:
+    path:     /chat/gethistoriconovo
+    defaults: { _controller: AppBundle:Chat:gethistoriconovo }
+
+chat_gethistorico:
+    path:     /chat/gethistorico
+    defaults: { _controller: AppBundle:Chat:gethistorico }
+
+chat_inserthistorico:
+    path:     /chat/inserthistorico
+    defaults: { _controller: AppBundle:Chat:inserthistorico }
+
+chat_updatehistorico:
+    path:     /chat/updatehistorico
+    defaults: { _controller: AppBundle:Chat:updatehistorico }
+
+chat_mens_nao_lidas:
+    path:     /chat/mens_nao_lidas
+    defaults: { _controller: AppBundle:Chat:mens_nao_lidas }
+
+carrega_imagens:
+    path:     /chat/carrega_imagens
+    defaults: { _controller: AppBundle:Chat:carrega_imagens }
+
+chat_getimagem:
+    path:     /chat/getimagem
+    defaults: { _controller: AppBundle:Chat:getimagem }
+
+perfil_validapass:
+    path:     /perfil/perfil_validapass
+    defaults: { _controller: AppBundle:Profile:perfil_validapass }
+
+perfil_mudapass:
+    path:     /perfil/perfil_mudapass
+    defaults: { _controller: AppBundle:Profile:perfil_mudapass }
+
+GetAllParametroAmostra:
+    pattern:  /GetAllParametroAmostra
+    defaults: { _controller: AppBundle:ListaTrabalho:GetAllParametroAmostra}
+
+GetMetodoPorParametro:
+    pattern:  /GetMetodoPorParametro
+    defaults: { _controller: AppBundle:ListaTrabalho:GetMetodoPorParametro}
+
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin

@@ -1,0 +1,324 @@
+{% if app.user %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/bootstrap.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/fontes_awesome.css') }}" />
+
+{% endblock %}
+
+{% stylesheets '@AppBundle/Resources/public/css/*' %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/app.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/style.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/menu.css') }}" />
+
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/ui-grid.min.css') }}" />
+{#<link rel="stylesheet" href="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.css">#}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/perfil.css') }}" />
+
+{% endstylesheets %}
+
+
+
+{% block javascripts %}
+	<script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/vendor/jquery.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/bmatznerfoundation/js/foundation.min.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+	{#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+	{#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+    <link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+    {#<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.js') }}"></script>
+	{#<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+	{#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/bootstrap.min.js') }}"></script>
+	{#<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/ui-grid.min.js') }}"></script>
+    {#<script src="https://cdn.rawgit.com/angular-ui/bower-ui-grid/master/ui-grid.min.js"></script>#}
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+	<script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+
+{% endblock %}
+
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="large-1 medium-1 columns" style="position:fixed;height:100vh;border: 1px solid #DFDFDF;z-index: 5;padding: 0;">
+			{% include 'default/menu.html.twig' %}
+		</div>
+
+		<div class="large-15 medium-15 columns">
+			<div class="row">
+				<div class="large-16 medium-16 columns">
+					{% include 'default/profile.html.twig' %}
+
+
+				</div>
+			</div>
+			<div class="row linha_branco"><div class="col-md-12">0</div></div>
+			<div class="row linha_branco" ><div class="col-md-12">0</div></div>
+			<div class="row linha_branco"><div class="col-md-12">0</div></div>
+			<div class="row linha_branco"><div class="col-md-12">0</div></div>
+			<div class="row linha_branco"><div class="col-md-12">0</div></div>
+
+			<form id="form" action="/app_dev.php/perfil" method="post" enctype="multipart/form-data">
+				<input type="hidden" id="util" name="util" value="{{app.user.id}}">
+
+                <div class="row">
+					<div class="col-md-4 linha_branco" >0</div>
+                    <div class="col-md-6 linha_branco">0</div>
+				</div>
+				<div class="col-md-1 linha_branco" >0</div>
+
+                <div class="row">
+					<div class="col-md-2">
+
+						<div class="profile_pic">
+
+                            <img id="img_perfil" class="imagem_redonda"
+							 name="img_perfil" src="" alt="" height="220px" width="220px";>
+
+                            <img src="/bundles/app/images/editar-perfil.png" id="editar_imagem" style="cursor:pointer" />
+                            <input type="file" id="file-input"  name="file-input" style="display:none" />
+
+
+
+                        </div>
+
+                        <script>
+                            $( document ).ready(function() {
+                                $("#editar_imagem").click(function () {
+                                    $("#file-input").trigger('click');
+                                });
+                            });
+                        </script>
+
+
+
+					</div>
+                    <div class="col-md-2 col-md-offset-1"><h6 class="grupo">Identificação</h6></div>
+                    <div class="col-md-6 linha_branco" >0</div>
+					<div class="row">
+						<div class="col-md-2 col-md-offset-1" style="padding-left: 10px;">
+							<label for="primeiro_nome" class="cor_label">Primeiro nome<span class="cor_asterisco">*</span></label>
+                            <input id="primeiro_nome" type="text"
+                                   name="primeiro_nome" value="{{app.user.firstname}}" required>
+                        </div>
+						<div class="col-md-2">
+							<label for="ultimo_nome" class="cor_label">Último nome<span class="cor_asterisco">*</span></label>
+                            <input id="ultimo_nome" type="text"
+                                   name="ultimo_nome" value="{{app.user.lastname}}" required>
+                        </div>
+						<div class="col-md-3">
+							<label for="email" class="cor_label">Email<span class="cor_asterisco">*</span></label>
+                            <input id="email" type="text" name="email" value="{{app.user.email}}" required>
+						</div>
+
+						<div class="col-md-1 linha_branco">0</div>
+						<div class="col-md-2" style="padding-left: 10px;">
+							<label for="cargo" class="cor_label">Cargo<span class="cor_asterisco">*</span></label>
+                            <div class="styled-select" >
+                                <select id="cargo" name="cargo">
+                                    <option value="tecnica">Técnica</option>
+                                    <option value="diretora">Diretora</option>
+                                    <option value="engenheiro">Engenheiro</option>
+                                    <option value="outro">Outro</option>
+                                </select>
+                            </div>
+						</div>
+						<div class="col-md-2">
+							<label for="genero" class="cor_label">Género<span class="cor_asterisco">*</span></label>
+                            <div class="styled-select">
+                                <select id="genero" name="genero">
+                                    <option value="f">Feminino</option>
+                                    <option value="m">Masculino</option>
+                                    <option value="u">Outro</option>
+                                </select>
+                            </div>
+						</div>
+
+						<div class="col-md-1 linha_branco">0</div>
+
+						<div class="col-md-3">
+							<button id="alt_password" data-popup-open="popup-1" style="padding: 5px 43px;"
+									class="hollow-button buttons-center">Alterar password</button>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="row" style="border-bottom: 1px solid #dfdfdf;"></div>
+				<div class="row linha_branco">0</div>
+				<div class="row linha_branco">0</div>
+				<div class="row">
+					<div class="col-md-4 linha_branco">0</div>
+					<div class="col-md-4"><h6 class="grupo">Dados pessoais (complementares)</h6></div>
+					<div class="col-md-4 linha_branco">0</div>
+				</div>
+                <div class="row linha_branco">0</div>
+				<div class="row">
+					<div class="col-md-4 linha_branco">0</div>
+
+                    <div class="col-md-4">
+						<h6 class="grupo"><label class="cor_label">Data de nascimento</label></h6>
+
+                        <div class="row">
+                            <div class="col-xs-4 col-sm-4" style="padding-left: 7px;">
+                                <div class="styled-select">
+                                    <select id="data_dia" name="data_dia">
+                                        <option value="" disabled selected style="color:#dfdfdf">Dia</option>
+                                        <option value="01">1</option>
+                                        <option value="02">2</option>
+                                        <option value="03">3</option>
+                                        <option value="04">4</option>
+                                        <option value="05">5</option>
+                                        <option value="06">6</option>
+                                        <option value="07">7</option>
+                                        <option value="08">8</option>
+                                        <option value="09">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                        <option value="13">13</option>
+                                        <option value="14">14</option>
+                                        <option value="15">15</option>
+                                        <option value="16">16</option>
+                                        <option value="17">17</option>
+                                        <option value="18">18</option>
+                                        <option value="19">19</option>
+                                        <option value="20">20</option>
+                                        <option value="21">21</option>
+                                        <option value="22">22</option>
+                                        <option value="23">23</option>
+                                        <option value="24">24</option>
+                                        <option value="25">25</option>
+                                        <option value="26">26</option>
+                                        <option value="27">27</option>
+                                        <option value="28">28</option>
+                                        <option value="29">29</option>
+                                        <option value="30">30</option>
+                                        <option value="31">31</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                            <div class="col-xs-4 col-sm-4">
+                                <div class="styled-select">
+                                    <select id="data_mes" name="data_mes">
+                                        <option value="" disabled selected style="color:#dfdfdf">Mês</option>
+                                        <option value="01">Janeiro</option>
+                                        <option value="02">Feveiro</option>
+                                        <option value="03">Março</option>
+                                        <option value="04">Abril</option>
+                                        <option value="05">Maio</option>
+                                        <option value="06">Junho</option>
+                                        <option value="07">Julho</option>
+                                        <option value="08">Agosto</option>
+                                        <option value="09">Setembro</option>
+                                        <option value="10">Outubro</option>
+                                        <option value="11">Novembro</option>
+                                        <option value="12">Dezembro</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-4 col-sm-4">
+                                <div class="styled-select">
+                                    <select id="data_ano" name="data_ano">
+                                    </select>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+				</div>
+
+                <div class="col-md-2">
+                    <label for="telefone" class="cor_label">Telefone</label>
+                    <input id="telefone" type="text" maxlength="64" name="telefone" value="{{app.user.phone}}">
+                </div>
+
+				<div class="row"><div class="col-md-4 linha_branco">0</div></div>
+
+					<div class="col-md-4 col-md-offset-4">
+                        <label for="morada" class="cor_label pos_label_morada">Morada</label>
+                        <textarea id="morada" name="morada"></textarea>
+                    </div>
+					<div class="col-md-2">
+						<label for="telemovel" class="cor_label">Telemóvel</label>
+                        <input id="telemovel" type="text" maxlength="64" name="telemovel" value="">
+					</div>
+
+
+				<div class="row">
+                    <div class="col-md-1 col-md-offset-4">
+                        <input id="cp_1" pattern="[0-9]{4}" placeholder="Cód. P." type="text" maxlength="4" name="cp_1" value="">
+                    </div>
+                    <div class="col-md-1">
+                        <input id="cp_2" pattern="[0-9]{3}" placeholder="000" type="text" name="cp_2" maxlength="3" value="">
+                    </div>
+
+                    <div class="col-md-1">
+                        <input id="cidade" placeholder="Cidade" type="text" maxlength="100" name="cidade" value="">
+                    </div>
+                </div>
+                <div class="row linha_branco">0</div>
+				<div class="row" style="border-bottom: 1px solid #dfdfdf;margin:0;"></div>
+				<div class="row linha_branco">0</div>
+
+				<div class="row">
+					<div class="col-md-2 col-md-offset-4">
+						<button type="submit" id="g_sair" class="btn-sucess">
+							<i class="fa fa-chevron-circle-left"></i>
+							<span>Guardar e sair</span>
+						</button>
+					</div>
+					<div class="col-md-2 ">
+						<button id="cancelar" class="btn-danger">
+                            <i class="fa fa-times-circle"></i>
+							<span>Cancelar</span>
+						</button>
+					</div>
+				</div>
+
+
+
+                {% include 'default/show_profile.html.twig' %}
+            </div>
+			</form>
+        </div>
+    </div>
+</div>
+<div class="popup" data-popup="popup-1">
+    <div class="popup-inner">
+        <img data-popup-close="popup-1" id="fecha_botao" src="/bundles/app/images/close.png" alt="">
+        <label for="pass_antiga" class="cor_label pos_label_old_pass">Password antiga<span class="cor_asterisco">*</span></label>
+        <input id="pass_antiga" type="password" name="pass_antiga" value="">
+
+        <label for="pass_nova" class="cor_label pos_label_new_pass">Nova password<span class="cor_asterisco">*</span></label>
+        <input id="pass_nova" type="password" name="pass_nova" value="">
+
+        <label for="r_pass_nova" class="cor_label pos_label_r_new_pass">Reescreva a nova password<span class="cor_asterisco">*</span></label>
+        <input id="r_pass_nova" type="password" name="re_pass_nova" value="">
+
+        <button type="submit" id="g_sair_1" class="btn-sucess">
+            <i class="fa fa-chevron-circle-left"></i>
+            <span>Guardar</span>
+        </button>
+        <button data-popup-close="popup-1" id="cancelar_1" class="btn-danger">
+            <i class="fa fa-times-circle"></i>
+            <span>Cancelar</span>
+        </button>
+
+    </div>
+</div>
+{% endif %}

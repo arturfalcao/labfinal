@@ -1,0 +1,162 @@
+<link rel="stylesheet" type="text/css" href="/bundles/app/css/calendario.css" />
+
+{% include 'AppBundle::resources.html.twig' %}
+
+<meta charset="ISO-8859-1">
+
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/bootstrap.css') }}" />
+
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/net/jquery-ui.css') }}" />
+{#<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">#}
+
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/fontes_awesome.css') }}" />
+
+
+{% endstylesheets %}
+ 
+{% block javascripts %}
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-1.11.3.min.js') }}"></script>
+    {#<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/jquery-ui.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/moment.min.js') }}"></script>
+    {#<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>#}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/fullcalendar.min.js') }}"></script>
+    {#<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.4.0/fullcalendar.min.js"></script>#}
+
+    <script type="text/javascript" src="{{ asset('bundles/app/js/lang-all.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/calendar-settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/app/js/ajaxsave.js') }}"></script>
+{% endblock %}
+
+{% block scripts -%}
+    <script type="text/javascript" src="{{ asset('bundles/app/js/net/angular.min.js') }}"></script>
+    {#<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>#}
+    <script type="text/javascript">
+        angular.module('CalendarModule', [])
+            .controller('CalendarCtrl', function($scope, $locale, $http) {
+                $scope.show = true;
+                $scope.changeshow = function(){
+                    $scope.show = $scope.show == true ? false : true;
+
+                }
+            }).config(function($interpolateProvider){
+                    $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
+                });
+
+
+    </script>
+{% endblock %}
+
+<div class="splash_screen" ></div>
+
+<script>
+    function mostra(){
+        $(".splash_screen").hide();
+    }
+    setTimeout(mostra, 3000);
+</script>
+
+<style>
+
+    body{
+        overflow: hidden;
+    }
+</style>
+
+<div class="container-fluid">
+    <div class="row" style="height: 100%;">
+        <div class="large-1 medium-1 columns no-padding" style="border: 1px solid #DFDFDF;z-index: 5;">
+            {% include 'default/menu.html.twig' %}
+        </div>
+
+        <div class="large-15 medium-15 columns form_letras">
+            <div class="row">
+                <div class="large-16 medium-16 columns">
+                    {% include 'default/topheader.html.twig' %}
+                </div>
+            </div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+            <div class="row linha_branco"><div class="col-md-12">0</div></div>
+
+            <div class="row">
+                <div >
+                    {% block body%}
+
+                        <!-- a minha Angular App -->
+                        <div ng-app="CalendarModule" style="padding-top:8px;">
+                            <div ng-controller="CalendarCtrl" >
+                                <div id="cal_new_event" style="display: none;">
+                                    {{ render(controller('AppBundle:Agenda:newshort')) }}
+                                </div>
+
+                                {% include 'ADesignsCalendarBundle::calendar.html.twig' %}
+
+                            </div>
+                        </div>
+
+                    {% endblock %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    function sendForm(form, callback) {
+        // Get all form values
+        var values = {};
+        $.each( form[0].elements, function(i, field) {
+            if (field.type != 'checkbox' || (field.type == 'checkbox' && field.checked)) {
+                values[field.name] = field.value;
+            }
+        });
+
+        // Post form
+        $.ajax({
+            type        : 'POST',
+            url         : '/app_dev.php/agenda/calendar/newshort',
+            data        : values,
+            success     : function(result) { callback( result );  }
+        });
+
+    }
+
+    $(function() {
+        $('#submit_short_calendar').on('click', function( e ){
+            e.preventDefault();
+            $("#cal_new_event").css( {display:"none"});
+
+            sendForm( $('#short_calendar'), function( response ){
+
+                var data = JSON.parse(response);
+                $('#calendar-holder').fullCalendar('renderEvent',
+                    {
+                        id: data.events.event.id,
+                        title: data.events.event.title,
+                        start: data.events.event.startdate,
+                        end: data.events.event.enddate,
+                        allDay: data.events.event.allday == 1 ? true : false
+                    }
+
+                );
+                $('#calendar-holder').fullCalendar('rerenderEvents');
+
+
+            });
+        });
+    });
+
+</script>
+

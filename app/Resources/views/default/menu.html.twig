@@ -1,0 +1,136 @@
+{% stylesheets%}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+{% endstylesheets %}
+
+<div style="height:96.5%;">
+    <a href="/app_dev.php/calendar" class=""><img id="logo" src="{{ asset('bundles/app/images/logo.png') }}" alt="ilab" /></a>
+    <nav class="navigation menu_principal">
+        <ul class="mainmenu">
+            <li>
+                <div class="menu_hover"></div>
+                <a href="" class="menu_planeamento"></a>
+                <ul class="submenu">
+                    <div class="subtitle">Planeamento de amostras</div>
+                    <li><a href="{{path('calendar') }}" >
+                            Calendário
+                        </a></li>
+
+                    <li><a href="{{ path('tamostras_planeamento') }}">Planeamento</a></li>
+                    <li><a href="/app_dev.php/NovoPlaneamento/new">Adicionar Planeamento</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="menu_hover"></div>
+                <a href="" class="menu_amostras"></a>
+                <ul class="submenu">
+                    <div class="subtitle">Amostras</div>
+                    <li><a href="{{path('admin_app_tamostras_list') }}" >Lista de Amostras</a></li>
+                    <li><a href="/app_dev.php/admin/app/tamostras/create" >Adicionar Amostras</a></li>
+
+                    <li><a href="{{ path('importacaoamostra') }}">Importação de Amostras</a></li>
+                </ul>
+            </li>
+            <li>
+                <div class="menu_hover"></div>
+                <a href="" class="menu_resultados"></a>
+                <ul class="submenu">
+                    <div class="subtitle">Resultados</div>
+                    <li>
+                        <a href="{{ path('EntradaResultados') }}">Entrada de Resultados</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <div class="menu_hover"></div><a href="" class="menu_configuracoes"></a>
+                <ul class="submenu grande_big">
+                    <div class="subtitle">Configurações</div>
+                    <li><a href="{{path('admin_app_tclientes_list') }}" >Clientes</a></li>
+                    <li><a href="{{ path('admin_app_tmodelosamostra_list') }}">Modelos Amostra</a></li>
+                    <li><a href="{{ path('admin_app_tmodelosparametro_list') }}">Modelos Parâmetros</a></li>
+                    <li><a href="{{ path('admin_app_tmodelosresultados_list') }}">Modelos Resultados</a></li>
+                    <li><a href="{{ path('admin_app_tparametros_list') }}">Parâmetros</a></li>
+                    <li><a href="{{ path('admin_app_tgruposparametros_list') }}">Grupos Parâmetros</a></li>
+                    <li><a href="{{ path('admin_app_tprodutos_list') }}">Produtos</a></li>
+                    <li><a href="{{ path('admin_app_tespecificacoes_list') }}">Especificações</a></li>
+                    <li><a href="{{ path('admin_app_tlegislacao_list') }}">Legislação</a></li>
+                    <li><a href="{{ path('admin_app_tunidadesmedida_list') }}">Unidades de Medida</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <div class="menu_hover"></div><a href="" class="menu_listagens"></a>
+                <ul class="submenu">
+                    <div class="subtitle">Listas de Trabalho</div>
+                    <li><a href="{{path('admin_app_modeloslistas_list') }}" >Modelos de Listas</a></li>
+                    <li><a href="{{path('EmiteListaporParametro') }}" >Emitir Lista de Trabalho</a></li>
+                    <li><a href="{{path('admin_app_listatrabalhos_list') }}" >Listas de Trabalho</a></li>
+                </ul>
+            </li>
+
+            {% if is_granted('ROLE_TECNICO_SUPERIOR') %}
+            <li>
+                <div class="menu_hover"></div>
+                <a href="" class="menu_cartas"></a>
+                <ul class="submenu">
+                    <div class="subtitle">Administração</div>
+                    <li><a href="{{path('sonata_admin_dashboard') }}" >Gestão de Utilizadores</a></li>
+                </ul>
+            </li>
+            {% endif %}
+
+        </ul>
+        {%if app.user %}
+            <div class="new-bottom-section">
+                <input type="hidden" id="util" name="util" value="{{app.user.id}}">
+                <a href="/app_dev.php/profile" class="user-menu">
+                    <div class="availability-wrap">
+                        <img id="img_user_logado" style="height: 40px;" src="" alt="">
+                        <i class="availability unavailable"></i>
+                    </div>
+                </a>
+                <a href="/app_dev.php/logout" class="logout">
+                    <img src="/bundles/app/images/logout.png" alt="">
+                </a>
+            </div>
+        {%endif%}
+    </nav>
+
+    <script>
+        $( document ).ready(function() {
+            var user = Number($('#util').val());
+            var img_user_logado = $("#img_user_logado");
+            $.ajax({
+                type: "POST",
+                url: '{{path('chat_getdusers')}}',
+                data: {id: user},
+                success: function(data) {
+
+                    var arr = $.parseJSON(data);
+                    if(arr.length != 0)
+                    {
+                        $.each(arr, function(index,value) {
+
+                            var imagem = value.imagem;
+                            if(imagem)
+                            {
+                                imagem = imagem.replace('"','');
+                                imagem = imagem.replace('"','');
+                                imagem = imagem.replace(/\\/g,'');
+                                img_user_logado.attr("src", imagem);
+                                if(value.firstname)
+                                    img_user_logado.attr("alt", imagem);
+                            }
+                        });
+
+
+
+                    }
+                }
+
+            });
+
+        });
+
+    </script>
+
+</div>

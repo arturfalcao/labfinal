@@ -1,0 +1,164 @@
+<script>
+    $( document ).ready(function() {
+
+        $('[data-popup-open]').on('click', function(e)  {
+            var targeted_popup_class = $(this).attr('data-popup-open');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+            e.preventDefault();
+        });
+
+        $('#cancelar').on('click', function(e)  {
+            window.location.href = '/app_dev.php/calendar';
+            e.preventDefault();
+        });
+
+        //----- CLOSE
+        $('[data-popup-close]').on('click', function(e)  {
+            var targeted_popup_class = $(this).attr('data-popup-close');
+            $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+
+            e.preventDefault();
+        });
+
+        $('#g_sair_1').on('click', function(e)  {
+            var pass_antiga = $("#pass_antiga").val();
+            var pass_nova = $("#pass_nova").val();
+            var r_pass_nova = $("#r_pass_nova").val();
+            var user = Number($('#util').val());
+            var ok;
+            $.ajax({
+                type: "POST",
+                url: '{{path('perfil_validapass')}}',
+                data: {id: user, password: pass_antiga},
+                success: function(data) {
+                    ok = Number(data);
+                    if(ok == 0)
+                    {
+                        $("#pass_antiga").val('');
+                        e.preventDefault();
+                    }
+                    else{
+                        if(pass_nova != r_pass_nova)
+                        {
+                            $("#pass_nova").val('');
+                            $("#r_pass_nova").val('');
+                            e.preventDefault();
+                        }
+                        else{
+                            if(pass_nova.length > 0)
+                            {
+                                $.ajax({
+                                    type: "POST",
+                                    url: '{{path('perfil_mudapass')}}',
+                                    data: {id: user, password: pass_nova},
+                                    success: function(data) {
+
+                                    }
+                                });
+                                $(".popup").hide();
+                            }
+                            else
+                            {
+                                e.preventDefault();
+                            }
+                        }
+
+                    }
+
+                }
+            });
+
+
+
+
+        });
+
+        var d = new Date();
+        var n = d.getFullYear();
+
+        $("#data_ano").append('<option value="" disabled selected style="color:#dfdfdf">Ano</option>');
+
+        for(var i=n-150;i<=n;i++)
+        {
+            $("#data_ano").append('<option value="' + i + '">' + i + '</option>');
+        }
+
+        $("#file-input").change(function(e){
+            var URL = window.URL;
+            var url = URL.createObjectURL(e.target.files[0]);
+            $("#img_perfil").attr("src", url);
+
+        });
+
+        var user = Number($('#util').val());
+        $.ajax({
+            type: "POST",
+            url: '{{path('chat_getdusers')}}',
+            data: {id: user},
+            success: function(data) {
+
+                var arr = $.parseJSON(data);
+                if(arr.length != 0)
+                {
+                    $.each(arr, function(index,value) {
+
+                        var imagem = value.imagem;
+                        var n;
+                        if(imagem)
+                        {
+                            imagem = imagem.replace('"','');
+                            imagem = imagem.replace('"','');
+                            imagem = imagem.replace(/\\/g,'');
+                            $("#img_perfil").attr("src", imagem);
+                        }
+
+                        $("#telemovel").val(value.telemovel);
+                        $("#morada").val(value.morada);
+                        var cp = value.codigopostal;
+                        if(cp)
+                        {
+                            n = cp.search('-');
+                            var cp_1 = cp.slice(0,n);
+                            var cp_2 = cp.slice(n+1);
+
+                            $("#cp_1").val(cp_1);
+                            $("#cp_2").val(cp_2);
+                        }
+                        $("#cidade").val(value.cidade);
+
+                        var data_nasc = value.data;
+                        if(data_nasc)
+                        {
+                            data_nasc = value.data.date;
+                            n=data_nasc.search(' ');
+                            data_nasc = data_nasc.slice(0,n);
+                            n = data_nasc.search('-');
+                            var ano = data_nasc.slice(0,n);
+                            var aux2 = data_nasc.slice(n+1);
+                            n = aux2.search('-');
+                            var mes=aux2.slice(0,n);
+                            var dia=aux2.slice(n+1);
+
+                            $("#data_dia").val(dia);
+
+                            $("#data_mes").val(mes);
+
+                            $("#data_ano").val(ano);
+                        }
+
+                    });
+
+
+
+                }
+            }
+
+        });
+
+
+
+    });
+
+
+</script>

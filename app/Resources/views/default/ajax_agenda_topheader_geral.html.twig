@@ -1,0 +1,158 @@
+<script>
+// funçao responsável por alterar se o evento já foi ou não realizado e atualizar na base de dados          
+function changeDone(element)
+{
+  var id_amag = $(element).attr('id');
+  
+  var am_ag = "#" + $(element).attr('id');
+  
+  var am_or_ag = id_amag.slice(0,2);
+  // ID da Amostra ou agenda
+  var nid = Number(id_amag.slice(3));
+
+  var risco;
+  var m;
+
+   if($(am_ag).is( ':checked' ))
+  {
+    m = 'label[for="' + id_amag +'"]';
+    $(m).css('background', '#4cc3b8');
+    risco=1;
+  }
+  else
+  {
+    m = 'label[for="' + id_amag +'"]';
+    $(m).css('background', 'white');
+    risco=0;
+  }  
+
+  // Amostra ou agenda
+  
+  $.ajax({
+          type: "POST",
+          url: '{{path('calendar_updateeventos')}}',
+          data: {slug: am_or_ag, done: risco, id: nid},
+          success: function(data) {
+          }
+      });
+      
+}
+
+$( document ).ready(function() {
+
+   $(function() {
+          $( "#tab_sidebar" ).tabs();
+          
+      });
+
+
+
+  var localidade = $('a.sonata-action-element');
+  var local = localidade.attr('href');
+  
+  localidade.hide();
+  $('#nova_entidade').attr("href",local);
+  
+  //INICIO CLICK MENU_DIREITA
+  $( ".menu_direita" ).click(function() {
+      $('#tabs-1').html('');
+      $('#tabs-2').html('');
+
+
+
+  $('.sideBarRight').toggle("show");
+
+  $('.li_agenda, .li_agenda a').click(function(){
+      var info;
+      var html;
+      var ok;
+      var m;
+      var tabs_1 = $('#tabs-1');
+      var user = Number($('#logged').val());
+      tabs_1.append("<div class='loading' style='margin-top:20px!important;'></div>");
+
+      $('.loading').show();
+
+      $(".agenda_hoje").remove();
+
+      // INICIO AJAX - responsável por buscar os eventos associados da agenda e da tamostras
+      $.ajax({
+          type: "POST",
+          url: '{{path('calendar_geteventos')}}',
+          data: {user},
+          success: function(data) {
+              var arr = $.parseJSON(data);
+              tabs_1.html('');
+              if(arr.length != 0)
+              {
+                $.each(arr, function(index,value) {
+                    var data = new Date(value.tempo.date);
+                    var data_format = (data.getHours() < 10 ? ('0' + data.getHours()) : data.getHours())
+                    + ':' + (data.getMinutes() < 10 ? ('0' + data.getMinutes()) : data.getMinutes()) +'h';
+                    var obs = value.observacao;
+                    if(!obs)
+                    {
+                        var ident = value.id;
+                        ident = ident.slice(3);
+                        obs = "Amostra planeada com o ID " + ident;
+                    }
+
+                      if(value.am_ag == 0)
+                      {
+                        info = data_format + ' - '+ obs;
+                        html = "<div class='agenda_hoje'>";
+
+
+                          html +=  "<div class='roundedOne'>";
+                        
+                        ok = '<input class="esconde" type="checkbox" onclick="changeDone(this)" id="' + value.id +'" name="check" /><label for="' + value.id +'"></label>';
+                        html += ok; 
+                        html += "</div>";
+                        html += '<p class="agenda" id="' + value.id + '">' + info + '</p>';
+                        html += "</div>";
+                          tabs_1.append(html);
+                        if(value.done==1)
+                        {
+                          m = 'label[for="' + value.id +'"]';
+                          $(m).css('background', '#4cc3b8');
+                        }
+                      
+                      } 
+                      else if(value.am_ag == 1)
+                      {
+                        info = obs;
+                        html = "<div class='agenda_hoje'>";
+                        html +=  "<div class='roundedOne'>";
+                        
+                        ok = '<input class="esconde" type="checkbox" onclick="changeDone(this)" id="' + value.id +'" name="check" /><label for="' + value.id +'"></label>';
+                        html += ok; 
+                        html += "</div>";
+                        html += '<p class="agenda" id="' + value.id + '">' + info + '</p>';
+                          html += "</div>";
+                          tabs_1.append(html);
+                        if(value.done==1)
+                        {
+                          m = 'label[for="' + value.id +'"]';
+                          $(m).css('background', '#4cc3b8');
+                        }
+                      }
+
+                       
+
+
+                });
+              }
+               
+              $('.loading').hide();
+          }
+      });
+      //FIM AJAX
+
+    });
+   
+ 
+  });
+ 
+});    
+
+</script>

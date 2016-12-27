@@ -1,0 +1,5 @@
+{% if is_granted('ROLE_ADMIN') %}
+    <a target="_blank" href="/app_dev.php/getpdflista/{{ admin.id(object) }}.pdf">
+        <img src="/bundles/app/images/print.png">
+    </a>
+{% endif %}

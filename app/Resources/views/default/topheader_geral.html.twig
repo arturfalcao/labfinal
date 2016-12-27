@@ -1,0 +1,124 @@
+{% block stylesheets %}
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/topheadergeral.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/fontes_awesome.css') }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('bundles/app/css/perfil.css') }}" />
+{% endblock %}
+
+
+
+{% if admin is defined %}
+<div class="row full-width-row">
+  <header class="large-15 medium-15 columns header push-1" >
+  {% if app.user %}
+    <input type="hidden" id="logged" value="{{app.user.id}}">
+    <input type="hidden" id="logged_username" value="{{app.user.username}}">
+  {% endif %}
+
+    <div class="large-8 medium-8 columns">
+      {% if 'list' in admin.request.pathInfo%}
+          {% if 'Legislacao' == admin.label %}
+          <h6 class="title"> Listagem de Legislacoes </h6>
+          {% elseif 'users'  == admin.label%}
+              <h6 class="title"> Listagem de Utilizadores </h6>
+          {% elseif 'groups'  == admin.label%}
+              <h6 class="title"> Listagem de Grupos </h6>
+          {% elseif 'Listas de Trabalho' == admin.label %}
+              <h6 class="title"> Listagem de Listas de Trabalho </h6>
+          {% elseif 'Regras formatacao'  == admin.label%}
+              <h6 class="title"> Listagem de Regras formatacoes </h6>
+          {% elseif 'Tipo de aprovacao'  == admin.label%}
+              <h6 class="title"> Listagem de Tipo de aprovacoes </h6>
+          {% else %}
+          <h6 class="title"> Listagem de {{  admin.label ~ (admin.label|last == 's' ? '' : 's') }} </h6>
+          {% endif %}
+      {% elseif 'edit' in admin.request.pathInfo%}
+        {% if 'users'  == admin.label%}
+          <h6 class="title"> Edição - Utilizadores </h6>
+        {% elseif 'groups'  == admin.label%}
+          <h6 class="title"> Edição - Grupos </h6>
+        {% else %}
+          <h6 class="title"> Edição - {{  admin.label }} </h6>
+         {% endif %}
+        {% elseif 'create' in admin.request.pathInfo%}
+          {% if 'users' == admin.label %}
+          <h6 class="title"> Criação - Utilizadores </h6>
+          {% elseif 'groups' == admin.label %}
+          <h6 class="title"> Criação - Grupos </h6>
+          {% else %}
+            <h6 class="title"> Criação - {{  admin.label }} </h6>
+          {% endif %}
+      {% elseif 'dashboard' in admin.request.pathInfo%}
+          <h6 class="title"> Dashboard </h6>
+      {% endif %}
+    </div>
+    {% if 'list' in admin.request.pathInfo %}
+      <div class="large-6 medium-6 columns">
+          {% if 'Listas de Trabalho' != admin.label %}
+          <a  id="nova_entidade" href="#" class="button right">Adicionar Novo</a>
+          {% else %}
+          <a class="button right inactiveLink bg_color"></a>
+          {% endif %}
+      </div>
+      <div class="large-1 medium-1 columns">
+        <div class="menu_direita" >
+          <div id="menu_direita_circulo"></div>
+        </div>
+      </div> 
+    {% else %}
+       {% if 'delete'in admin.request.pathInfo %}
+          <div class="large-14 medium-14 columns">
+              <a class="button right inactiveLink bg_color"></a>
+          </div>
+       {% elseif 'batch' in admin.request.pathInfo %}
+        <div class="large-14 medium-14 columns">
+            <a class="button right inactiveLink bg_color"></a>
+        </div>
+       {% else %}
+          <div class="large-6 medium-6 columns">
+              <a class="button right inactiveLink bg_color"></a>
+          </div>
+       {% endif %}
+
+       <div class="large-1 medium-1 columns">
+        <div class="menu_direita">
+          <div id="menu_direita_circulo"></div>
+        </div>
+      </div>  
+    {% endif %}
+    
+    
+
+    {% include 'default/ajax_chat_topheader_geral.html.twig' %}
+
+    {% include 'default/ajax_agenda_topheader_geral.html.twig' %}
+
+    <div id="tab_sidebar" class="sideBarRight" style="display: none;">
+
+
+        <ul class="nav nav-tabs material-tabs" role="tablist" style="padding: 0!important;border-bottom:1px solid #dfdfdf!important;">
+            <li  class="li_agenda" style="float: left">
+            <a id="chat_tab" style="padding: 10px 18px!important;" class="tabulador" href="#tabs-1" aria-controls="notifications" role="tab" data-toggle="tab" aria-expanded="false">Agenda de hoje</a>
+            
+            </li>
+            
+            <li class="li_chat"><a class="tabulador" href="#tabs-2" style="padding: 10px 60px!important;" aria-controls="message" role="tab" data-toggle="tab" aria-expanded="true">Chat</a>
+            </li>
+        
+        </ul>
+        <div id="n_lidas" style="margin-top: -12px;">
+                
+        </div>
+        
+        <div id="tabs-1" style="padding-top: 15px!important;">
+            
+        </div>
+        
+        <div id="tabs-2">
+            
+        </div> 
+    </div>
+
+  </header>
+</div>
+
+{% endif %}
